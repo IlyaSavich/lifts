@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LIFT", "LIFT\LIFT.csproj", "{9607E11B-BEB2-4A44-8323-D048D34643EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D8B8F128-74A5-4583-B167-03351C0AF7D0}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9607E11B-BEB2-4A44-8323-D048D34643EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9607E11B-BEB2-4A44-8323-D048D34643EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9607E11B-BEB2-4A44-8323-D048D34643EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9607E11B-BEB2-4A44-8323-D048D34643EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
