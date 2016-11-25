@@ -7,7 +7,7 @@ using LIFT.LiftSystem.Building.Contracts;
 namespace LIFT.LiftSystem.Building
 {
     /**
-     * This class works with substances belonging to building: lifts, buttons on floors, persons on floors
+     * This class works with substance   s    to building: lifts, buttons on floors, persons on floors
      */
 
     public class Building : IBuilding
