@@ -10,23 +10,23 @@ using System.Windows.Forms;
 
 namespace LIFT
 {
-    public partial class Form3 : Form
+    public partial class Start : Form
     {
-        private Form1 startPage;
-        public Form3(Form1 st)
+        private StartPage startPage;
+        public Start(StartPage st)
         {
             InitializeComponent();
             startPage = st;
         }
 
-        private void Form3_FormClosing(object sender, FormClosingEventArgs e)
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
             startPage.Show();
             e.Cancel = true;
             this.Hide();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

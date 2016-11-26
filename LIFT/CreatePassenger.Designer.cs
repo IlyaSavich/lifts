@@ -1,6 +1,6 @@
 ﻿namespace LIFT
 {
-    partial class Form4
+    partial class CreatePassenger
     {
         /// <summary>
         /// Required designer variable.

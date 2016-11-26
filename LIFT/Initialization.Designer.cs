@@ -1,6 +1,6 @@
 ﻿namespace LIFT
 {
-    partial class Form3
+    partial class Initialization
     {
         /// <summary>
         /// Required designer variable.

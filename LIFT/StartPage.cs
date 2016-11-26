@@ -10,20 +10,20 @@ using System.Windows.Forms;
 
 namespace LIFT
 {
-    public partial class Form1 : Form
+    public partial class StartPage : Form
     {
-        public Form1()
+        public StartPage()
         {
             InitializeComponent();
-            start = new Form2(this);
-            init = new Form3(this);
-            create = new Form4(this);
+            start = new Start(this);
+            init = new Initialization(this);
+            create = new CreatePassenger(this);
             
             
         }
-        Form2 start;
-        Form3 init;
-        Form4 create;
+        Start start;
+        Initialization init;
+        CreatePassenger create;
        
         private void Form1_Load(object sender, EventArgs e)
         {

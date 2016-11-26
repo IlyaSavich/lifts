@@ -54,5 +54,7 @@ namespace LIFT.LiftSystem.Building
             }
             this.Buttons[floor][liftNumber] = true;
         }
+
+         
     }
 }

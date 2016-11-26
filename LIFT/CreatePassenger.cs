@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace LIFT
 {
-    public partial class Form4 : Form
+    public partial class CreatePassenger : Form
     {
-        private Form1 startPage;
-        public Form4(Form1 st)
+        private StartPage startPage;
+        public CreatePassenger(StartPage st)
         {
             InitializeComponent();
             startPage = st;

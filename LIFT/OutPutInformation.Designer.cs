@@ -1,6 +1,6 @@
 ﻿namespace LIFT
 {
-    partial class Form5
+    partial class OutPutInformation
     {
         /// <summary>
         /// Required designer variable.

@@ -11,6 +11,10 @@ namespace LIFT.LiftSystem.Lift
     public class Lift : ILift
     {
         /**
+         *   Contents MaxWeight of passengers in Lift
+         */
+        protected const int MaxWeight = 400;
+        /**
          * The current status of the lift
          */
         protected int Status;
@@ -31,6 +35,11 @@ namespace LIFT.LiftSystem.Lift
         protected List<bool> Buttons;
 
         /**
+         * список Пассажиров в лифте        добавить
+         * */
+
+        protected List<Passenger.Passenger> AllPassengersInLift;
+        /**
          * Set button inside lift.
          * Lift will stop on this floor if it's on locate on his way or if the lift has no another route
          */
@@ -38,6 +47,29 @@ namespace LIFT.LiftSystem.Lift
         public void SetButton(int floor)
         {
             this.Buttons[floor] = true;
+        }
+        /**
+         Checking weight of all Passengers in Lift
+          */
+          /*
+        public bool CheckWeight(int weight)
+        {
+            bool allow = false;
+            int sumWeight = 0;
+            for (int i ==, , )
+            {
+                 
+            }
+            return allow;
+        }
+        */
+        public void AddPassenger()
+        {
+           // AllPassengersInLift.Add();
+        }
+        public void DelPassenger()
+        {
+
         }
     }
 }
