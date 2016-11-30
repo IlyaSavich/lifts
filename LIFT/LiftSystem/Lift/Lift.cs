@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
 using LIFT.LiftSystem.Lift.Contracts;
 
 namespace LIFT.LiftSystem.Lift
@@ -37,7 +36,7 @@ namespace LIFT.LiftSystem.Lift
 
         public void SetButton(int floor)
         {
-            this.Buttons[floor] = true;
+            Buttons[floor] = true;
         }
     }
 }

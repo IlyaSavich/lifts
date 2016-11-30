@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
-using System.Threading;
 using LIFT.LiftSystem.Building.Contracts;
 
 namespace LIFT.LiftSystem.Building
@@ -34,25 +32,26 @@ namespace LIFT.LiftSystem.Building
 
         public Building(int floorsCount, int liftsCount)
         {
-            this.FloorsCount= floorsCount;
-            this.LiftsCount = liftsCount;
+            FloorsCount = floorsCount;
+            LiftsCount = liftsCount;
         }
 
         /**
          * Set button enabled on selected floor and select to specific lift
          */
+
         public void PressButton(int floor, int liftNumber)
         {
-            if (floor > this.FloorsCount)
+            if (floor > FloorsCount)
             {
                 throw new InvalidExpressionException("The selected floor is invalid: " + floor);
             }
 
-            if (liftNumber < 0 || liftNumber > this.LiftsCount)
+            if (liftNumber < 0 || liftNumber > LiftsCount)
             {
                 throw new InvalidExpressionException("The selected lift is invalid: " + liftNumber);
             }
-            this.Buttons[floor][liftNumber] = true;
+            Buttons[floor][liftNumber] = true;
         }
     }
 }

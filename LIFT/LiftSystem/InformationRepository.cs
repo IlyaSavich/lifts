@@ -17,7 +17,7 @@ namespace LIFT.LiftSystem
          */
         public static void Update(string name, string value)
         {
-            InformationRepository.Info[name] = value;
+            Info[name] = value;
         }
 
         /**
@@ -25,7 +25,7 @@ namespace LIFT.LiftSystem
          */
         public static string Get(string name)
         {
-            return (string)InformationRepository.Info[name];
+            return (string)Info[name];
         }
 
         /**
@@ -33,7 +33,7 @@ namespace LIFT.LiftSystem
          */
         public static Hashtable GetFullInfo()
         {
-            return InformationRepository.Info;
+            return Info;
         }
     }
 }
