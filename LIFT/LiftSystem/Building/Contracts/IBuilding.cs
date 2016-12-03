@@ -6,6 +6,6 @@
 
     public interface IBuilding
     {
-        void PressButton(int floor, int liftNumber);
+        void PressButton(Passenger.Passenger passenger);
     }
 }

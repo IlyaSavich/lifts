@@ -15,19 +15,12 @@ namespace LIFT
         [STAThread]
         static void Main()
         {
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Form1());
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new StartPage());
             
-            InformationRepository.Update("name","Vasya");
-            Console.WriteLine(InformationRepository.Get("name"));
-            InformationRepository.Update("name", "Petya");
-            Hashtable fullInfo = InformationRepository.GetFullInfo();
-            ICollection a = fullInfo.Keys;
-            foreach (string s in a)
-                Console.WriteLine(s + ": " + fullInfo[s]);
-            Console.ReadLine();
-
+            //LiftSystem.LiftSystem liftSystem = new LiftSystem.LiftSystem(5, 2);
+            //Console.WriteLine("OK");
         }
     }
 }
