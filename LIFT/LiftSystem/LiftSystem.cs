@@ -34,7 +34,7 @@ namespace LIFT.LiftSystem
         public void CreatePassenger(int weight, int necessaryFloor, int currentFloor)
         {
             Passenger.Passenger passenger = new Passenger.Passenger(weight, necessaryFloor, currentFloor);
-            Thread.Sleep(LiftSystem.PassengerPressBtnTime);
+            Thread.Sleep(PassengerPressBtnTime);
             Building.PressButton(passenger);
         }
     }

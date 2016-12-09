@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using LIFT.LiftSystem.Lift.Contracts;
 
@@ -45,6 +44,11 @@ namespace LIFT.LiftSystem.Lift
         protected int NeccessaryFloor;
 
         /**
+         * Flag to top on the next floor
+         */
+        protected bool StopOnNextFloor = false;
+
+        /**
          * The buttons inside the lift. It count depends on the number of floors in the building
          */
         protected List<bool> Buttons;
@@ -67,8 +71,8 @@ namespace LIFT.LiftSystem.Lift
         public Lift(int floorsCount)
         {
             FloorsCalls = new bool[floorsCount];
-            Status = Lift.StatusStandingCloseDoors;
-            CurrentFloor = Lift.StartFloorNumber;
+            Status = StatusStandingCloseDoors;
+            CurrentFloor = StartFloorNumber;
 
             EnvThread = new Thread(CalcMovingParameters);
         }
@@ -80,7 +84,7 @@ namespace LIFT.LiftSystem.Lift
 
         public void SetButton(int floor)
         {
-            this.Buttons[floor] = true;
+            Buttons[floor] = true;
         }
 
         /**
@@ -125,7 +129,7 @@ namespace LIFT.LiftSystem.Lift
 
         protected void ActionByStatus()
         {
-            if (Status == Lift.StatusStandingCloseDoors || Status == Lift.StatusStandingOpenDoors)
+            if (Status == StatusStandingCloseDoors || Status == StatusStandingOpenDoors)
             {
                 StandingActions();
             }
@@ -139,10 +143,10 @@ namespace LIFT.LiftSystem.Lift
         {
             int floorCalled = CheckFloorsCalls();
 
-            if (floorCalled != Lift.FloorNotCalled)
+            if (floorCalled != FloorNotCalled)
             {
                 bool moveUp = CheckMoveUp(floorCalled);
-                int newStatus = moveUp ? Lift.StatusMoveUp : Lift.StatusMoveDown;
+                int newStatus = moveUp ? StatusMoveUp : StatusMoveDown;
 
                 ChangeStatus(newStatus);
             }
@@ -151,17 +155,25 @@ namespace LIFT.LiftSystem.Lift
         protected void MovingActions()
         {
             EnvThread.Start();
-            Thread.Sleep(Lift.TimeMovingBetweenFloors);
+            Thread.Sleep(TimeMovingBetweenFloors);
         }
 
         protected void CalcMovingParameters()
         {
-            
+            CheckNextFloorCalled();
         }
 
-        /*protected bool CheckNextFloorCalled()
+        protected bool CheckNextFloorCalled()
         {
-        }*/
+            int nextFloor = Status == StatusMoveUp ? CurrentFloor + 1 : (Status == StatusMoveDown ? CurrentFloor - 1 : -1);
+
+            if (FloorsCalls[nextFloor])
+            {
+                StopOnNextFloor = true;
+            }
+
+            return StopOnNextFloor;
+        }
 
         /**
          * Checking if the passengers calls lift on floors
@@ -179,7 +191,7 @@ namespace LIFT.LiftSystem.Lift
                 }
             }
 
-            return Lift.FloorNotCalled;
+            return FloorNotCalled;
         }
 
         /**
@@ -188,7 +200,7 @@ namespace LIFT.LiftSystem.Lift
 
         protected bool CheckMoveUp(int floorCalled)
         {
-            return (floorCalled - CurrentFloor) > 0 ? true : false;
+            return (floorCalled - CurrentFloor) > 0;
         }
 
         protected void ChangeStatus(int newStatus)
