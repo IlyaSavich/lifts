@@ -44,6 +44,14 @@ namespace LIFT.LiftSystem.Building
 
         public Building(int floorsCount, int liftsCount)
         {
+            Init(floorsCount, liftsCount);
+        }
+
+        /**
+         * Initialize building and lifts
+         */
+        public void Init(int floorsCount, int liftsCount)
+        {
             FloorsCount = floorsCount;
             LiftsCount = liftsCount;
 
@@ -74,7 +82,17 @@ namespace LIFT.LiftSystem.Building
                     Console.WriteLine(exception.Message);
                     System.Environment.Exit(1);
                 }
-                LiftsThreads[i].Start();
+            }
+        }
+
+        /**
+         * Start working
+         */
+        public void Start()
+        {
+            foreach (Thread LiftThread in LiftsThreads)
+            {
+                LiftThread.Start();
             }
         }
 

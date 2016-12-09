@@ -13,19 +13,27 @@ namespace LIFT.LiftSystem
          */
         public static readonly int PassengerPressBtnTime = 5000;
 
+        /**
+         * Statuses constants of the system
+         */
+        public static readonly int StatusStop = 0;
+        public static readonly int StatusActive = 0;
+        public static readonly int StatusPause = 0;
+
+        /**
+         * Building in system for working with lifts
+         */
         protected Building.Building Building;
+
+        /**
+         * Status of the system
+         */
+        protected int Status;
 
         public LiftSystem(int floorsCount, int liftsCount)
         {
             Building = new Building.Building(floorsCount, liftsCount);
-        }
-
-        /**
-         * Wrapper method for getting full info
-         */
-        public Hashtable GetFullInfo()
-        {
-            return InformationRepository.GetFullInfo();
+            Status = StatusStop;
         }
 
         /**
@@ -33,9 +41,36 @@ namespace LIFT.LiftSystem
          */
         public void CreatePassenger(int weight, int necessaryFloor, int currentFloor)
         {
+            if (Status != StatusActive)
+            {
+                return;
+            }
+
             Passenger.Passenger passenger = new Passenger.Passenger(weight, necessaryFloor, currentFloor);
             Thread.Sleep(PassengerPressBtnTime);
             Building.PressButton(passenger);
+        }
+
+        /**
+         * Init building and lifts.
+         */
+        public void Init(int floorsCount, int liftsCount)
+        {
+            if (Status != StatusStop && Status != StatusPause)
+            {
+                return;
+            }
+
+            Building.Init(floorsCount, liftsCount);
+        }
+
+        /**
+         * Start working
+         */
+        public void Start()
+        {
+            Status = StatusActive;
+            Building.Start();
         }
     }
 }

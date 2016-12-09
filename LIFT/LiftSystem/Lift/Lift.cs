@@ -119,6 +119,9 @@ namespace LIFT.LiftSystem.Lift
             FloorsCalls[floorNumber] = true;
         }
 
+        /**
+         * Lift run method
+         */
         public void Run()
         {
             while (true)
@@ -127,6 +130,9 @@ namespace LIFT.LiftSystem.Lift
             }
         }
 
+        /**
+         * Doing action depends on status of lift movement
+         */
         protected void ActionByStatus()
         {
             if (Status == StatusStandingCloseDoors || Status == StatusStandingOpenDoors)
@@ -139,6 +145,9 @@ namespace LIFT.LiftSystem.Lift
             }
         }
 
+        /**
+         * Do actions when lift standing
+         */
         protected void StandingActions()
         {
             int floorCalled = CheckFloorsCalls();
@@ -152,17 +161,26 @@ namespace LIFT.LiftSystem.Lift
             }
         }
 
-        protected void MovingActions()
+        /**
+         * Do actions when lift moving
+         */
+        protected void MovingActions() // TODO
         {
             EnvThread.Start();
             Thread.Sleep(TimeMovingBetweenFloors);
         }
 
+        /**
+         * Calc if lift must stop on the next floor
+         */
         protected void CalcMovingParameters()
         {
             CheckNextFloorCalled();
         }
 
+        /**
+         * Checking if on the next floor passenger did call lift
+         */
         protected bool CheckNextFloorCalled()
         {
             int nextFloor = Status == StatusMoveUp ? CurrentFloor + 1 : (Status == StatusMoveDown ? CurrentFloor - 1 : -1);
