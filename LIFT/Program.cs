@@ -18,6 +18,10 @@ namespace LIFT
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StartPage());
+            
+            
+            
+            
             /**/
             //LiftSystem.LiftSystem liftSystem = new LiftSystem.LiftSystem(5, 2);
             //Console.WriteLine("OK");
