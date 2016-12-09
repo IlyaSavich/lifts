@@ -35,23 +35,6 @@ namespace LIFT.Properties
         }
 
         /// <summary>
-        ///   Returns the cached ResourceManager instance used by this class.
-        /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if ((resourceMan == null))
-                {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LIFT.Properties.Resources", typeof(Resources).Assembly);
-                    resourceMan = temp;
-                }
-                return resourceMan;
-            }
-        }
-
-        /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
@@ -67,5 +50,141 @@ namespace LIFT.Properties
                 resourceCulture = value;
             }
         }
+/*
+        internal static System.Drawing.Bitmap Building1
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Building1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap ForeverAlone
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("ForeverAlone", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap Geek
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Geek", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap LiftDoors_1
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("LiftDoors_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap LiftDoors_2
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("LiftDoors_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap LiftDoors_3
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("LiftDoors_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap LiftDoors_4
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("LiftDoors_4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap LiftDoors_Closed
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("LiftDoors_Closed", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap LiftDoors_Open
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("LiftDoors_Open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap NoMan
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("NoMan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap SheMad
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("SheMad", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap SheSmartass
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("SheSmartass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap SheSmile
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("SheSmile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap Smile
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("Smile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        internal static System.Drawing.Bitmap TrollMan
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("TrollMan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        */
     }
 }
