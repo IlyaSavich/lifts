@@ -31,30 +31,14 @@
             this.components = new System.ComponentModel.Container();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-<<<<<<< HEAD
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.startMenuSubitem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stopMenuSubitem = new System.Windows.Forms.ToolStripMenuItem();
-            this.initMenuSubitem = new System.Windows.Forms.ToolStripMenuItem();
-            this.creatPassengerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.randomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.inputParametresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.informationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.outputToScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.outPutToMSWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.outputToMSExelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-=======
->>>>>>> new gui
+
             this.statusBar1 = new System.Windows.Forms.StatusBar();
             this.statusPanelMoving = new System.Windows.Forms.StatusBarPanel();
             this.statusPanelPaused = new System.Windows.Forms.StatusBarPanel();
             this.statusPanelPassengersNumber = new System.Windows.Forms.StatusBarPanel();
             this.statusPanelWorkingTime = new System.Windows.Forms.StatusBarPanel();
             this.timerWorkingTime = new System.Windows.Forms.Timer(this.components);
-<<<<<<< HEAD
-            this.menuStrip1.SuspendLayout();
-=======
+
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorMessageNecFloor = new System.Windows.Forms.TextBox();
             this.OutPutinformation = new System.Windows.Forms.Label();
@@ -84,17 +68,16 @@
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
->>>>>>> new gui
+
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelMoving)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPaused)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPassengersNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelWorkingTime)).BeginInit();
-<<<<<<< HEAD
-=======
+
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.panel2.SuspendLayout();
->>>>>>> new gui
+
             this.SuspendLayout();
             // 
             // imageList1
@@ -103,109 +86,11 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-<<<<<<< HEAD
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.systemToolStripMenuItem,
-            this.creatPassengerToolStripMenuItem,
-            this.informationToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1006, 24);
-            this.menuStrip1.TabIndex = 6;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // systemToolStripMenuItem
-            // 
-            this.systemToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.startMenuSubitem,
-            this.stopMenuSubitem,
-            this.initMenuSubitem});
-            this.systemToolStripMenuItem.Name = "systemToolStripMenuItem";
-            this.systemToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.systemToolStripMenuItem.Text = "System";
-            // 
-            // startMenuSubitem
-            // 
-            this.startMenuSubitem.Name = "startMenuSubitem";
-            this.startMenuSubitem.Size = new System.Drawing.Size(152, 22);
-            this.startMenuSubitem.Text = "Start";
-            this.startMenuSubitem.Click += new System.EventHandler(this.startMenuSubitem_Click);
-            // 
-            // stopMenuSubitem
-            // 
-            this.stopMenuSubitem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.stopMenuSubitem.Name = "stopMenuSubitem";
-            this.stopMenuSubitem.Size = new System.Drawing.Size(152, 22);
-            this.stopMenuSubitem.Text = "Stop";
-            this.stopMenuSubitem.Click += new System.EventHandler(this.stopMenuSubitem_Click);
-            // 
-            // initMenuSubitem
-            // 
-            this.initMenuSubitem.Name = "initMenuSubitem";
-            this.initMenuSubitem.Size = new System.Drawing.Size(152, 22);
-            this.initMenuSubitem.Text = "Initialization";
-            this.initMenuSubitem.Click += new System.EventHandler(this.initMenuSubitem_Click);
-            // 
-            // creatPassengerToolStripMenuItem
-            // 
-            this.creatPassengerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.randomToolStripMenuItem,
-            this.inputParametresToolStripMenuItem});
-            this.creatPassengerToolStripMenuItem.Name = "creatPassengerToolStripMenuItem";
-            this.creatPassengerToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
-            this.creatPassengerToolStripMenuItem.Text = "CreatPassenger";
-            // 
-            // randomToolStripMenuItem
-            // 
-            this.randomToolStripMenuItem.Name = "randomToolStripMenuItem";
-            this.randomToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.randomToolStripMenuItem.Text = "Random";
-            // 
-            // inputParametresToolStripMenuItem
-            // 
-            this.inputParametresToolStripMenuItem.Name = "inputParametresToolStripMenuItem";
-            this.inputParametresToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
-            this.inputParametresToolStripMenuItem.Text = "Input Parametres";
-            this.inputParametresToolStripMenuItem.Click += new System.EventHandler(this.inputParametresToolStripMenuItem_Click);
-            // 
-            // informationToolStripMenuItem
-            // 
-            this.informationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.outputToScreenToolStripMenuItem,
-            this.outPutToMSWordToolStripMenuItem,
-            this.outputToMSExelToolStripMenuItem});
-            this.informationToolStripMenuItem.Name = "informationToolStripMenuItem";
-            this.informationToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
-            this.informationToolStripMenuItem.Text = "Information";
-            // 
-            // outputToScreenToolStripMenuItem
-            // 
-            this.outputToScreenToolStripMenuItem.Name = "outputToScreenToolStripMenuItem";
-            this.outputToScreenToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.outputToScreenToolStripMenuItem.Text = "Output to screen";
-            // 
-            // outPutToMSWordToolStripMenuItem
-            // 
-            this.outPutToMSWordToolStripMenuItem.Name = "outPutToMSWordToolStripMenuItem";
-            this.outPutToMSWordToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.outPutToMSWordToolStripMenuItem.Text = "OutPut to MSWord";
-            // 
-            // outputToMSExelToolStripMenuItem
-            // 
-            this.outputToMSExelToolStripMenuItem.Name = "outputToMSExelToolStripMenuItem";
-            this.outputToMSExelToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.outputToMSExelToolStripMenuItem.Text = "Output to MSExel";
-            // 
-            // statusBar1
-            // 
-            this.statusBar1.Location = new System.Drawing.Point(0, 502);
-=======
+
             // statusBar1
             // 
             this.statusBar1.Location = new System.Drawing.Point(20, 432);
->>>>>>> new gui
+
             this.statusBar1.Name = "statusBar1";
             this.statusBar1.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.statusPanelMoving,
@@ -213,11 +98,9 @@
             this.statusPanelPassengersNumber,
             this.statusPanelWorkingTime});
             this.statusBar1.ShowPanels = true;
-<<<<<<< HEAD
-            this.statusBar1.Size = new System.Drawing.Size(1006, 22);
-=======
+
             this.statusBar1.Size = new System.Drawing.Size(991, 22);
->>>>>>> new gui
+
             this.statusBar1.TabIndex = 7;
             this.statusBar1.Text = "statusBar1";
             // 
@@ -247,20 +130,7 @@
             this.timerWorkingTime.Enabled = true;
             this.timerWorkingTime.Tick += new System.EventHandler(this.timerWorkingTime_Tick);
             // 
-<<<<<<< HEAD
-            // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 524);
-            this.Controls.Add(this.statusBar1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-=======
+
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -549,50 +419,32 @@
             this.Controls.Add(this.statusBar1);
             this.Name = "StartPage";
             this.Text = "Elevator Simulator";
->>>>>>> new gui
+
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelMoving)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPaused)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPassengersNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelWorkingTime)).EndInit();
-<<<<<<< HEAD
-            this.ResumeLayout(false);
-            this.PerformLayout();
-=======
+
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
->>>>>>> new gui
+
 
         }
 
         #endregion
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ImageList imageList1;
-<<<<<<< HEAD
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem informationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem outputToScreenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem outPutToMSWordToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem outputToMSExelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem creatPassengerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem randomToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem inputParametresToolStripMenuItem;
-=======
->>>>>>> new gui
+
         private System.Windows.Forms.StatusBar statusBar1;
         private System.Windows.Forms.StatusBarPanel statusPanelMoving;
         private System.Windows.Forms.StatusBarPanel statusPanelPaused;
         private System.Windows.Forms.StatusBarPanel statusPanelPassengersNumber;
         private System.Windows.Forms.StatusBarPanel statusPanelWorkingTime;
         private System.Windows.Forms.Timer timerWorkingTime;
-<<<<<<< HEAD
-        private System.Windows.Forms.ToolStripMenuItem startMenuSubitem;
-        private System.Windows.Forms.ToolStripMenuItem stopMenuSubitem;
-        private System.Windows.Forms.ToolStripMenuItem initMenuSubitem;
-=======
+
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.Button StopButtoon;
@@ -622,7 +474,7 @@
         private System.Windows.Forms.Button MsWord;
         private System.Windows.Forms.Button toScreen;
         private System.Windows.Forms.Panel panel2;
->>>>>>> new gui
+
     }
 }
 
