@@ -17,8 +17,8 @@ namespace LIFT.LiftSystem
          * Statuses constants of the system
          */
         public static readonly int StatusStop = 0;
-        public static readonly int StatusActive = 0;
-        public static readonly int StatusPause = 0;
+        public static readonly int StatusActive = 1;
+        public static readonly int StatusPause = 2;
 
         /**
          * Building in system for working with lifts
@@ -69,6 +69,11 @@ namespace LIFT.LiftSystem
          */
         public void Start()
         {
+            if (Status != StatusStop)
+            {
+                return;
+            }
+
             Status = StatusActive;
             Building.Start();
         }

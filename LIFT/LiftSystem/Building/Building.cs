@@ -47,9 +47,6 @@ namespace LIFT.LiftSystem.Building
             Init(floorsCount, liftsCount);
         }
 
-        /**
-         * Initialize building and lifts
-         */
         public void Init(int floorsCount, int liftsCount)
         {
             FloorsCount = floorsCount;
@@ -80,7 +77,7 @@ namespace LIFT.LiftSystem.Building
                 catch (ArgumentException exception)
                 {
                     Console.WriteLine(exception.Message);
-                    System.Environment.Exit(1);
+                    Environment.Exit(1);
                 }
             }
         }
@@ -90,9 +87,9 @@ namespace LIFT.LiftSystem.Building
          */
         public void Start()
         {
-            foreach (Thread LiftThread in LiftsThreads)
+            foreach (Thread liftThread in LiftsThreads)
             {
-                LiftThread.Start();
+                liftThread.Start();
             }
         }
 
@@ -101,12 +98,12 @@ namespace LIFT.LiftSystem.Building
          */
         public void PressButton(Passenger.Passenger passenger)
         {
-            if (passenger.NecessaryFloor > this.FloorsCount)
+            if (passenger.NecessaryFloor > FloorsCount)
             {
                 throw new InvalidExpressionException("The selected floor is invalid: " + passenger.NecessaryFloor);
             }
 
-            if (passenger.LiftNumber < 0 || passenger.LiftNumber > this.LiftsCount)
+            if (passenger.LiftNumber < 0 || passenger.LiftNumber > LiftsCount)
             {
                 throw new InvalidExpressionException("The selected lift is invalid: " + passenger.LiftNumber);
             }

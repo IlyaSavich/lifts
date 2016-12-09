@@ -1,6 +1,8 @@
-﻿namespace LIFT.LiftSystem.Passenger
+﻿using LIFT.LiftSystem.Passenger.Contracts;
+
+namespace LIFT.LiftSystem.Passenger
 {
-    public class Passenger
+    public class Passenger : IPassenger
     {
        /**
         * Contents person characteristics
