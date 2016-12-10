@@ -268,6 +268,7 @@ namespace LIFT.LiftSystem.Lift
             catch (ThreadInterruptedException exception)
             {
                 ChangeStatus(StatusStandingCloseDoors);
+                FloorsCalls[CurrentFloor - 1] = false;
                 NeccessaryFloor = FloorNotCalled;
             }
         }
@@ -327,6 +328,10 @@ namespace LIFT.LiftSystem.Lift
         {
             for (var floorNumber = 0; floorNumber < ButtonsInside.Length; floorNumber++)
             {
+                if (Id == 0)
+                {
+                    Console.WriteLine("Lift" + Id + ": btn-inside " + floorNumber + " -> " + ButtonsInside[floorNumber]);
+                }
                 if (ButtonsInside[floorNumber])
                 {
                     return floorNumber + 1;
@@ -335,6 +340,10 @@ namespace LIFT.LiftSystem.Lift
 
             for (var floorNumber = 0; floorNumber < FloorsCalls.Length; floorNumber++)
             {
+                if (Id == 0)
+                {
+                    Console.WriteLine("Lift" + Id + ": floor-calls " + floorNumber + " -> " + FloorsCalls[floorNumber]);
+                }
                 if (FloorsCalls[floorNumber])
                 {
                     return floorNumber + 1;
