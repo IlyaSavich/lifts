@@ -4,6 +4,8 @@ namespace LIFT.LiftSystem.Passenger
 {
     public class Passenger : IPassenger
     {
+        public static readonly int StatusWaitOnFloor = 1;
+
        /**
         * Contents person characteristics
         */
@@ -50,6 +52,31 @@ namespace LIFT.LiftSystem.Passenger
             _Weight = weight;
             _NecessaryFloor = necessaryFloor;
             _CurrentFloor = currentFloor;
+        }
+
+        public void CallLift(Lift.Lift lift)
+        {
+            lift.Call(CurrentFloor);
+            Status = StatusWaitOnFloor;
+        }
+
+        public bool EnterLift(Lift.Lift lift)
+        {
+            bool result = lift.AddPassenger(this);
+
+            if (!result)
+            {
+                return false;
+            }
+
+            PressButtonInLift(lift);
+
+            return true;
+        }
+
+        public void PressButtonInLift(Lift.Lift lift)
+        {
+            lift.PressButtonInside(NecessaryFloor);
         }
     }
 }

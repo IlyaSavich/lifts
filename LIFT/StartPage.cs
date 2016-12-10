@@ -175,7 +175,7 @@ namespace LIFT
             }
             /* if (WeightButton.Text == i.ToString())
              {
-                 this.CurrentFloor = i;
+                 this._CurrentFloor = i;
                  errorMessageCurrentFloor.Text = "";
 
              }*/

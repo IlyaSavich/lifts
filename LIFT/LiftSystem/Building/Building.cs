@@ -68,7 +68,7 @@ namespace LIFT.LiftSystem.Building
         {
             for (int i = 0; i < Lifts.Length; i++)
             {
-                Lifts[i] = new Lift.Lift(FloorsCount);
+                Lifts[i] = new Lift.Lift(i, FloorsCount, LiftEventOnFloorStop);
 
                 try
                 {
@@ -109,7 +109,7 @@ namespace LIFT.LiftSystem.Building
             }
             Buttons[passenger.NecessaryFloor, passenger.LiftNumber] = true;
 
-            Lifts[passenger.CurrentFloor].Call(passenger.CurrentFloor);
+            passenger.CallLift(Lifts[passenger.CurrentFloor]);
         }
 
         /**
@@ -118,6 +118,21 @@ namespace LIFT.LiftSystem.Building
         public void AddPassenger(Passenger.Passenger passenger)
         {
             Passengers[passenger.CurrentFloor].Add(passenger);
+        }
+
+        public void LiftEventOnFloorStop(int liftId)
+        {
+            int liftFloor = Lifts[liftId].CurrentFloor;
+
+            foreach (Passenger.Passenger passenger in Passengers[liftFloor])
+            {
+                if (!passenger.EnterLift(Lifts[liftId]))
+                {
+                    break;
+                }
+            }
+
+            LiftsThreads[liftId].Interrupt();
         }
     }
 }
