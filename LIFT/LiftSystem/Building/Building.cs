@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Security.Authentication;
 using System.Threading;
+using System.Threading.Tasks;
 using LIFT.LiftSystem.Building.Contracts;
 
 namespace LIFT.LiftSystem.Building
@@ -12,6 +14,8 @@ namespace LIFT.LiftSystem.Building
 
     public class Building : IBuilding
     {
+        public static readonly int TimePassengerMovement = 2000;
+
         /**
          * The array of all buttons from all floors
          */
@@ -42,9 +46,19 @@ namespace LIFT.LiftSystem.Building
          */
         protected int LiftsCount;
 
+        /**
+         * Timer calc time when passneger moving to lift or live in system after delivery
+         */
+        public static Task Timer;
+
         public Building(int floorsCount, int liftsCount)
         {
             Init(floorsCount, liftsCount);
+        }
+
+        protected void TimerTask()
+        {
+            Thread.Sleep(TimePassengerMovement);
         }
 
         public void Init(int floorsCount, int liftsCount)
@@ -53,6 +67,10 @@ namespace LIFT.LiftSystem.Building
             LiftsCount = liftsCount;
 
             Passengers = new List<Passenger.Passenger>[floorsCount];
+            for (int i = 0; i < floorsCount; i++)
+            {
+                Passengers[i] = new List<Passenger.Passenger>();
+            }
             Lifts = new Lift.Lift[liftsCount];
             LiftsThreads = new Thread[liftsCount];
             Buttons = new bool[floorsCount, liftsCount];
@@ -76,8 +94,8 @@ namespace LIFT.LiftSystem.Building
                 }
                 catch (ArgumentException exception)
                 {
-                    Console.WriteLine(exception.Message);
-                    Environment.Exit(1);
+                    Console.WriteLine(exception.StackTrace);
+                    Environment.Exit(-1);
                 }
             }
         }
@@ -85,6 +103,7 @@ namespace LIFT.LiftSystem.Building
         /**
          * Start working
          */
+
         public void Start()
         {
             foreach (Thread liftThread in LiftsThreads)
@@ -96,43 +115,84 @@ namespace LIFT.LiftSystem.Building
         /**
          * Set button enabled on selected floor and select to specific lift
          */
+
         public void PressButton(Passenger.Passenger passenger)
         {
-            if (passenger.NecessaryFloor > FloorsCount)
+            try
             {
-                throw new InvalidExpressionException("The selected floor is invalid: " + passenger.NecessaryFloor);
+                Buttons[passenger.NecessaryFloor - 1, passenger.LiftNumber] = true;
+                passenger.CallLift(Lifts[passenger.LiftNumber]);
             }
-
-            if (passenger.LiftNumber < 0 || passenger.LiftNumber > LiftsCount)
+            catch (IndexOutOfRangeException e)
             {
-                throw new InvalidExpressionException("The selected lift is invalid: " + passenger.LiftNumber);
+                Console.WriteLine(e.StackTrace);
+                Environment.Exit(-1);
             }
-            Buttons[passenger.NecessaryFloor, passenger.LiftNumber] = true;
-
-            passenger.CallLift(Lifts[passenger.CurrentFloor]);
         }
 
         /**
          * Adding passenger to floor
          */
+
         public void AddPassenger(Passenger.Passenger passenger)
         {
-            Passengers[passenger.CurrentFloor].Add(passenger);
+            Passengers[passenger.CurrentFloor - 1].Add(passenger);
         }
 
         public void LiftEventOnFloorStop(int liftId)
         {
-            int liftFloor = Lifts[liftId].CurrentFloor;
+            ExitLift(Lifts[liftId]);
+            SetPassengersToLift(Lifts[liftId]);
+            Buttons[Lifts[liftId].CurrentFloor - 1, liftId] = false;
 
-            foreach (Passenger.Passenger passenger in Passengers[liftFloor])
+            LiftsThreads[liftId].Interrupt();
+        }
+
+        protected void ExitLift(Lift.Lift lift)
+        {
+            Timer = Task.Factory.StartNew(TimerTask);
+            int currentFloor = lift.CurrentFloor;
+            List<Passenger.Passenger> removePassengers = lift.ExitPassengers();
+            Timer.Wait();
+
+            foreach (Passenger.Passenger passenger in removePassengers)
             {
-                if (!passenger.EnterLift(Lifts[liftId]))
+                Passengers[currentFloor].Remove(passenger);
+            }
+        }
+
+        protected void SetPassengersToLift(Lift.Lift lift)
+        {
+            List<Passenger.Passenger> removePassengers = new List<Passenger.Passenger>();
+
+            foreach (Passenger.Passenger passenger in Passengers[lift.CurrentFloor - 1])
+            {
+                if (!passenger.EnterLift(lift))
                 {
                     break;
                 }
+                removePassengers.Add(passenger);
             }
 
-            LiftsThreads[liftId].Interrupt();
+            foreach (Passenger.Passenger passenger in removePassengers)
+            {
+                Passengers[lift.CurrentFloor - 1].Remove(passenger);
+            }
+        }
+
+        public void ValidatePassenger(Passenger.Passenger passenger)
+        {
+            if (passenger.CurrentFloor > FloorsCount || passenger.CurrentFloor <= 0)
+            {
+                throw new InvalidCredentialException(
+                    "Passenger current floor is invalid. Building has no such floors. " + passenger.CurrentFloor);
+            }
+
+            if (passenger.NecessaryFloor > FloorsCount || passenger.NecessaryFloor <= 0)
+            {
+                throw new InvalidCredentialException(
+                    "Passenger neccesary floor is invalid. Building has no such floors. " + passenger.NecessaryFloor);
+            }
         }
     }
 }

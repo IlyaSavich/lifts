@@ -1,10 +1,12 @@
-﻿using LIFT.LiftSystem.Passenger.Contracts;
+﻿using System.Security.Authentication;
+using LIFT.LiftSystem.Passenger.Contracts;
 
 namespace LIFT.LiftSystem.Passenger
 {
     public class Passenger : IPassenger
     {
         public static readonly int StatusWaitOnFloor = 1;
+        public static readonly int StatusOnNeccessaryFloor = 1;
 
        /**
         * Contents person characteristics
@@ -38,7 +40,7 @@ namespace LIFT.LiftSystem.Passenger
         }
 
         /**
-        * Contents person Status
+        * Contents person _Status
         */
         protected int _Status;
         public int Status
@@ -47,11 +49,17 @@ namespace LIFT.LiftSystem.Passenger
             set { _Status = value; }
         }
 
-        public Passenger(int weight, int necessaryFloor, int currentFloor)
+        public Passenger(int weight, int necessaryFloor, int currentFloor, int liftNumber)
         {
-            _Weight = weight;
-            _NecessaryFloor = necessaryFloor;
-            _CurrentFloor = currentFloor;
+            if (weight <= 0)
+            {
+                throw new InvalidCredentialException("Weight can't be zero or negative");
+            }
+
+            Weight = weight;
+            NecessaryFloor = necessaryFloor;
+            CurrentFloor = currentFloor;
+            LiftNumber = liftNumber;
         }
 
         public void CallLift(Lift.Lift lift)
@@ -72,6 +80,11 @@ namespace LIFT.LiftSystem.Passenger
             PressButtonInLift(lift);
 
             return true;
+        }
+
+        public void ExitLift()
+        {
+            Status = StatusOnNeccessaryFloor;
         }
 
         public void PressButtonInLift(Lift.Lift lift)

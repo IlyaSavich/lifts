@@ -18,10 +18,10 @@ namespace LIFT.LiftSystem.Lift
          */
         public static readonly int MaxWeight = 400;
 
-        public static readonly int TimeMovingBetweenFloors = 5000;
+        public static readonly int TimeMovingBetweenFloors = 2000;
 
         public static readonly int FloorNotCalled = -1;
-        public static readonly int StartFloorNumber = 0;
+        public static readonly int StartFloorNumber = 1;
 
         /**
          * Statuses of lifts
@@ -29,7 +29,7 @@ namespace LIFT.LiftSystem.Lift
         public static readonly int StatusStandingOpenDoors = 1;
         public static readonly int StatusStandingCloseDoors = 2;
         public static readonly int StatusMoveDown = 3;
-        public static readonly int StatusMoveUp = 3;
+        public static readonly int StatusMoveUp = 4;
 
         /**
          * Id of the lift. Init of create object. NOT CHANGE IT THROUGH ALL WORK
@@ -39,7 +39,13 @@ namespace LIFT.LiftSystem.Lift
         /**
          * The current status of the lift
          */
-        protected int Status;
+        protected int _Status;
+
+        public int Status
+        {
+            get { return _Status; }
+        }
+
 
         /**
          * The lift on this floor at the moment
@@ -91,22 +97,13 @@ namespace LIFT.LiftSystem.Lift
         {
             FloorsCalls = new bool[floorsCount];
             ButtonsInside = new bool[floorsCount];
+            AllPassengersInLift = new List<Passenger.Passenger>();
 
             Id = id;
-            Status = StatusStandingCloseDoors;
+            _Status = StatusStandingCloseDoors;
             _CurrentFloor = StartFloorNumber;
 
             OnFloorStop += eventCallbackOnFloorStop;
-            InitTimer();
-        }
-
-        /**
-         * Init task timer
-         */
-
-        protected void InitTimer()
-        {
-            Timer = new Task(TimerTask);
         }
 
         protected void TimerTask()
@@ -121,12 +118,13 @@ namespace LIFT.LiftSystem.Lift
 
         public void SetButton(int floor)
         {
-            Buttons[floor] = true;
+            Buttons[floor - 1] = true;
         }
 
         /**
          * Checking weight of all Passengers in Lift
          */
+
         public bool AllowWeight(int weight)
         {
             int totalWeight = weight;
@@ -135,23 +133,47 @@ namespace LIFT.LiftSystem.Lift
                 totalWeight += passengerInLift.Weight;
             }
 
-            return totalWeight > MaxWeight;
+            return totalWeight < MaxWeight;
         }
 
         public bool AddPassenger(Passenger.Passenger passenger)
-        { 
+        {
             if (!AllowWeight(passenger.Weight))
             {
+                Console.WriteLine("Lift" + Id + ": Passenger need to lose weight. Rejected weight " + passenger.Weight);
                 return false;
             }
 
+            Console.WriteLine("Lift" + Id + ": Adding passenger with weight " + passenger.Weight);
             AllPassengersInLift.Add(passenger);
 
             return true;
         }
 
-        public void DeletePassenger()
+        public List<Passenger.Passenger> ExitPassengers()
         {
+            List<Passenger.Passenger> removePassengers = new List<Passenger.Passenger>();
+            foreach (Passenger.Passenger passenger in AllPassengersInLift)
+            {
+                if (passenger.NecessaryFloor == CurrentFloor)
+                {
+                    removePassengers.Add(passenger);
+                }
+            }
+
+            foreach (Passenger.Passenger passenger in removePassengers)
+            {
+                if (passenger.NecessaryFloor == CurrentFloor)
+                {
+                    Console.WriteLine("Passenger exit Lift" + Id + " on " + CurrentFloor + " floor");
+                    passenger.ExitLift();
+                    AllPassengersInLift.Remove(passenger);
+
+                    ButtonsInside[passenger.NecessaryFloor - 1] = false;
+                }
+            }
+
+            return removePassengers;
         }
 
         /**
@@ -160,7 +182,7 @@ namespace LIFT.LiftSystem.Lift
 
         public void Call(int floorNumber)
         {
-            FloorsCalls[floorNumber] = true;
+            FloorsCalls[floorNumber - 1] = true;
         }
 
         /**
@@ -169,6 +191,7 @@ namespace LIFT.LiftSystem.Lift
 
         public void Run()
         {
+            Console.WriteLine("Lift" + Id + ": Standing on " + CurrentFloor + " floor");
             while (true)
             {
                 ActionByStatus();
@@ -181,7 +204,7 @@ namespace LIFT.LiftSystem.Lift
 
         protected void ActionByStatus()
         {
-            if (Status == StatusStandingCloseDoors || Status == StatusStandingOpenDoors)
+            if (_Status == StatusStandingCloseDoors || _Status == StatusStandingOpenDoors)
             {
                 StandingActions();
             }
@@ -197,15 +220,20 @@ namespace LIFT.LiftSystem.Lift
 
         protected void StandingActions()
         {
-            int floorCalled = CheckFloorsCalls();
-
-            if (floorCalled != FloorNotCalled)
+            int floorCalled = GetNeccessaryFloor();
+            
+            if (floorCalled == CurrentFloor)
             {
-                bool moveUp = CheckMoveUp(floorCalled);
-                int newStatus = moveUp ? StatusMoveUp : StatusMoveDown;
+                StopOnFloor();
+            } else if (floorCalled != FloorNotCalled)
+            {
                 NeccessaryFloor = floorCalled;
+                bool moveUp = CheckMoveUp(NeccessaryFloor);
+                int newStatus = moveUp ? StatusMoveUp : StatusMoveDown;
 
                 ChangeStatus(newStatus);
+
+                Console.WriteLine("Lift" + Id + ": Start movement to " + NeccessaryFloor + " floor");
             }
         }
 
@@ -215,11 +243,13 @@ namespace LIFT.LiftSystem.Lift
 
         protected void MovingActions() // TODO
         {
-            Timer.Start();
+            Timer = Task.Factory.StartNew(TimerTask);
 
             int nextFloor = CalcNextFloor();
+            Console.WriteLine("Lift" + Id + ": On " + CurrentFloor + " floor Passengers " + AllPassengersInLift.Count);
             Timer.Wait();
-            if (NeccessaryFloor == nextFloor)
+            _CurrentFloor = nextFloor;
+            if (NeccessaryFloor == CurrentFloor)
             {
                 StopOnFloor();
             }
@@ -227,7 +257,9 @@ namespace LIFT.LiftSystem.Lift
 
         protected void StopOnFloor()
         {
+            Console.WriteLine("Lift" + Id + ": Stop on " + CurrentFloor + " floor");
             OnFloorStop?.Invoke(Id);
+            ChangeStatus(StatusStandingOpenDoors);
 
             try
             {
@@ -235,8 +267,22 @@ namespace LIFT.LiftSystem.Lift
             }
             catch (ThreadInterruptedException exception)
             {
-                
+                ChangeStatus(StatusStandingCloseDoors);
+                NeccessaryFloor = FloorNotCalled;
             }
+        }
+
+        public int CalcSelectedFloorInside()
+        {
+            for (var i = 0; i < ButtonsInside.Length; i++)
+            {
+                if (ButtonsInside[i])
+                {
+                    return i;
+                }
+            }
+
+            return FloorNotCalled;
         }
 
         /**
@@ -256,7 +302,7 @@ namespace LIFT.LiftSystem.Lift
         {
             int nextFloor = CalcNextFloor();
 
-            if (FloorsCalls[nextFloor])
+            if (FloorsCalls[nextFloor - 1])
             {
                 StopOnNextFloor = true;
             }
@@ -270,22 +316,28 @@ namespace LIFT.LiftSystem.Lift
 
         protected int CalcNextFloor()
         {
-            return Status == StatusMoveUp ? _CurrentFloor + 1 : (Status == StatusMoveDown ? _CurrentFloor - 1 : -1);
+            return _Status == StatusMoveUp ? _CurrentFloor + 1 : (_Status == StatusMoveDown ? _CurrentFloor - 1 : -1);
         }
 
         /**
          * Checking if the passengers calls lift on floors
          */
 
-        protected int CheckFloorsCalls()
+        protected int GetNeccessaryFloor()
         {
-            for (int floorNumber = 0; floorNumber < FloorsCalls.Length; floorNumber++)
+            for (var floorNumber = 0; floorNumber < ButtonsInside.Length; floorNumber++)
             {
-                bool called = FloorsCalls[floorNumber];
-
-                if (called)
+                if (ButtonsInside[floorNumber])
                 {
-                    return floorNumber;
+                    return floorNumber + 1;
+                }
+            }
+
+            for (var floorNumber = 0; floorNumber < FloorsCalls.Length; floorNumber++)
+            {
+                if (FloorsCalls[floorNumber])
+                {
+                    return floorNumber + 1;
                 }
             }
 
@@ -303,12 +355,12 @@ namespace LIFT.LiftSystem.Lift
 
         protected void ChangeStatus(int newStatus)
         {
-            Status = newStatus;
+            _Status = newStatus;
         }
 
         public void PressButtonInside(int floorSelected)
         {
-            ButtonsInside[floorSelected] = true;
+            ButtonsInside[floorSelected - 1] = true;
         }
     }
 }

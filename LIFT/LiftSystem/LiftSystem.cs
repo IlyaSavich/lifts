@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Security.Authentication;
 using System.Threading;
 
 namespace LIFT.LiftSystem
@@ -26,7 +28,7 @@ namespace LIFT.LiftSystem
         protected Building.Building Building;
 
         /**
-         * Status of the system
+         * _Status of the system
          */
         protected int Status;
 
@@ -39,14 +41,24 @@ namespace LIFT.LiftSystem
         /**
          * Creating new passenger in system. 
          */
-        public void CreatePassenger(int weight, int necessaryFloor, int currentFloor)
+        public void CreatePassenger(int weight, int necessaryFloor, int currentFloor, int liftNumber = 0)
         {
             if (Status != StatusActive)
             {
                 return;
             }
 
-            Passenger.Passenger passenger = new Passenger.Passenger(weight, necessaryFloor, currentFloor);
+            Passenger.Passenger passenger = new Passenger.Passenger(weight, necessaryFloor, currentFloor, liftNumber);
+            try
+            {
+                Building.ValidatePassenger(passenger);
+            }
+            catch (InvalidCredentialException e)
+            {
+                Console.WriteLine(e.Message);
+                Environment.Exit(-1);
+            }
+            Building.AddPassenger(passenger);
             Thread.Sleep(PassengerPressBtnTime);
             Building.PressButton(passenger);
         }
@@ -67,15 +79,17 @@ namespace LIFT.LiftSystem
         /**
          * Start working
          */
-        public void Start()
+        public bool Start()
         {
             if (Status != StatusStop)
             {
-                return;
+                return false;
             }
 
             Status = StatusActive;
             Building.Start();
+
+            return true;
         }
     }
 }
