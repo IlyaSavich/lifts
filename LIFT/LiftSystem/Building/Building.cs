@@ -151,13 +151,15 @@ namespace LIFT.LiftSystem.Building
         protected void ExitLift(Lift.Lift lift)
         {
             Timer = Task.Factory.StartNew(TimerTask);
+
             int currentFloor = lift.CurrentFloor;
             List<Passenger.Passenger> removePassengers = lift.ExitPassengers();
+
             Timer.Wait();
 
             foreach (Passenger.Passenger passenger in removePassengers)
             {
-                Passengers[currentFloor].Remove(passenger);
+                Passengers[currentFloor - 1].Remove(passenger);
             }
         }
 

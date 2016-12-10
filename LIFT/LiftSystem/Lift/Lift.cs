@@ -62,11 +62,6 @@ namespace LIFT.LiftSystem.Lift
          */
         protected int NeccessaryFloor;
 
-        /**
-         * Flag to top on the next floor
-         */
-        protected bool StopOnNextFloor;
-
         protected bool[] ButtonsInside;
 
         /**
@@ -221,11 +216,12 @@ namespace LIFT.LiftSystem.Lift
         protected void StandingActions()
         {
             int floorCalled = GetNeccessaryFloor();
-            
+
             if (floorCalled == CurrentFloor)
             {
                 StopOnFloor();
-            } else if (floorCalled != FloorNotCalled)
+            }
+            else if (floorCalled != FloorNotCalled)
             {
                 NeccessaryFloor = floorCalled;
                 bool moveUp = CheckMoveUp(NeccessaryFloor);
@@ -246,20 +242,28 @@ namespace LIFT.LiftSystem.Lift
             Timer = Task.Factory.StartNew(TimerTask);
 
             int nextFloor = CalcNextFloor();
+            bool isStopNextFloor = CalcNextFloorStop(nextFloor);
+
             Console.WriteLine("Lift" + Id + ": On " + CurrentFloor + " floor Passengers " + AllPassengersInLift.Count);
             Timer.Wait();
+
             _CurrentFloor = nextFloor;
+
             if (NeccessaryFloor == CurrentFloor)
             {
                 StopOnFloor();
             }
+            else if (isStopNextFloor)
+            {
+                StopOnFloor(false);
+            }
         }
 
-        protected void StopOnFloor()
+        protected void StopOnFloor(bool isNeccessaryFloor = true)
         {
             Console.WriteLine("Lift" + Id + ": Stop on " + CurrentFloor + " floor");
             OnFloorStop?.Invoke(Id);
-            ChangeStatus(StatusStandingOpenDoors);
+            int previousStatus = ChangeStatus(StatusStandingOpenDoors);
 
             try
             {
@@ -267,48 +271,34 @@ namespace LIFT.LiftSystem.Lift
             }
             catch (ThreadInterruptedException exception)
             {
-                ChangeStatus(StatusStandingCloseDoors);
                 FloorsCalls[CurrentFloor - 1] = false;
-                NeccessaryFloor = FloorNotCalled;
-            }
-        }
 
-        public int CalcSelectedFloorInside()
-        {
-            for (var i = 0; i < ButtonsInside.Length; i++)
-            {
-                if (ButtonsInside[i])
+                if (isNeccessaryFloor)
                 {
-                    return i;
+                    NeccessaryFloor = FloorNotCalled;
+                    ChangeStatus(StatusStandingCloseDoors);
                 }
+                else
+                {
+                    ChangeStatus(previousStatus);
+                }
+
+                Console.WriteLine("Lift" + Id + ": Standing on " + CurrentFloor + " floor");
             }
-
-            return FloorNotCalled;
-        }
-
-        /**
-         * Calc if lift must stop on the next floor
-         */
-
-        protected void CalcMovingParameters() // TODO remove this
-        {
-            CheckNextFloorCalled();
         }
 
         /**
          * Checking if on the next floor passenger did call lift
          */
 
-        protected bool CheckNextFloorCalled()
+        protected bool CalcNextFloorStop(int nextFloor)
         {
-            int nextFloor = CalcNextFloor();
-
-            if (FloorsCalls[nextFloor - 1])
+            /*for (int i = 0; i < FloorsCalls.Length; i++)
             {
-                StopOnNextFloor = true;
-            }
-
-            return StopOnNextFloor;
+                Console.WriteLine("\tFloor" + (i + 1) + " -> " + FloorsCalls[i]);
+                Console.WriteLine("\tInside" + (i + 1) + " -> " + ButtonsInside[i]);
+            }*/
+            return FloorsCalls[nextFloor - 1] || ButtonsInside[nextFloor - 1];
         }
 
         /**
@@ -326,27 +316,49 @@ namespace LIFT.LiftSystem.Lift
 
         protected int GetNeccessaryFloor()
         {
-            for (var floorNumber = 0; floorNumber < ButtonsInside.Length; floorNumber++)
+            int neccessaryFloor = CalcSelectedFloorInside();
+
+            if (neccessaryFloor != FloorNotCalled)
             {
-                if (Id == 0)
+                return neccessaryFloor;
+            }
+
+            return CalcFloorCalled();
+        }
+
+        public int CalcSelectedFloorInside()
+        {
+            return CalcBtnListPress(ButtonsInside);
+        }
+
+        public int CalcFloorCalled()
+        {
+            return CalcBtnListPress(FloorsCalls);
+        }
+
+        protected int CalcBtnListPress(bool[] btns)
+        {
+            for (var i = CurrentFloor - 1; i >= 0; i--)
+            {
+                /*if (Id == 0)
                 {
-                    Console.WriteLine("Lift" + Id + ": btn-inside " + floorNumber + " -> " + ButtonsInside[floorNumber]);
-                }
-                if (ButtonsInside[floorNumber])
+                    Console.WriteLine("Lift" + Id + ": btn " + floorNumber + " -> " + btns[floorNumber]);
+                }*/
+                if (btns[i])
                 {
-                    return floorNumber + 1;
+                    return i + 1;
                 }
             }
 
-            for (var floorNumber = 0; floorNumber < FloorsCalls.Length; floorNumber++)
+            for (int i = CurrentFloor - 1; i < btns.Length; i++)
             {
-                if (Id == 0)
+                /*if (Id == 0)
                 {
-                    Console.WriteLine("Lift" + Id + ": floor-calls " + floorNumber + " -> " + FloorsCalls[floorNumber]);
-                }
-                if (FloorsCalls[floorNumber])
+                    Console.WriteLine("Lift" + Id + ": btn " + i + " -> " + btns[i]);
+                }*/
+                if (btns[i])
                 {
-                    return floorNumber + 1;
+                    return i + 1;
                 }
             }
 
@@ -362,9 +374,12 @@ namespace LIFT.LiftSystem.Lift
             return (floorCalled - _CurrentFloor) > 0;
         }
 
-        protected void ChangeStatus(int newStatus)
+        protected int ChangeStatus(int newStatus)
         {
+            int previousStatus = Status;
             _Status = newStatus;
+
+            return previousStatus;
         }
 
         public void PressButtonInside(int floorSelected)
