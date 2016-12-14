@@ -65,30 +65,6 @@
     <Compile Include="StartPage.Designer.cs">
       <DependentUpon>StartPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Start.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Start.Designer.cs">
-      <DependentUpon>Start.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Initialization.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Initialization.Designer.cs">
-      <DependentUpon>Initialization.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CreatePassenger.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CreatePassenger.Designer.cs">
-      <DependentUpon>CreatePassenger.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OutPutInformation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OutPutInformation.Designer.cs">
-      <DependentUpon>OutPutInformation.cs</DependentUpon>
-    </Compile>
     <Compile Include="LiftSystem\Building\Building.cs" />
     <Compile Include="LiftSystem\Building\Contracts\IBuilding.cs" />
     <Compile Include="LiftSystem\Lift\Contracts\ILift.cs" />
@@ -100,18 +76,6 @@
     <Compile Include="LiftSystem\InformationRepository.cs" />
     <EmbeddedResource Include="StartPage.resx">
       <DependentUpon>StartPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Start.resx">
-      <DependentUpon>Start.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Initialization.resx">
-      <DependentUpon>Initialization.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CreatePassenger.resx">
-      <DependentUpon>CreatePassenger.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OutPutInformation.resx">
-      <DependentUpon>OutPutInformation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

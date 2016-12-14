@@ -29,22 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartPage));
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-
             this.statusBar1 = new System.Windows.Forms.StatusBar();
             this.statusPanelMoving = new System.Windows.Forms.StatusBarPanel();
             this.statusPanelPaused = new System.Windows.Forms.StatusBarPanel();
             this.statusPanelPassengersNumber = new System.Windows.Forms.StatusBarPanel();
             this.statusPanelWorkingTime = new System.Windows.Forms.StatusBarPanel();
             this.timerWorkingTime = new System.Windows.Forms.Timer(this.components);
-
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorMessageNecFloor = new System.Windows.Forms.TextBox();
             this.OutPutinformation = new System.Windows.Forms.Label();
             this.MSExelButton = new System.Windows.Forms.Button();
             this.MsWord = new System.Windows.Forms.Button();
-            this.toScreen = new System.Windows.Forms.Button();
             this.errorMessageCurrentFloor = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.StartParam = new System.Windows.Forms.TextBox();
@@ -65,19 +63,14 @@
             this.WeightButton = new System.Windows.Forms.TextBox();
             this.NumOfLifts = new System.Windows.Forms.TextBox();
             this.NumberOfFloorsButton = new System.Windows.Forms.TextBox();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.panel2 = new System.Windows.Forms.Panel();
-
+            this.panelPaint = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelMoving)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPaused)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPassengersNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelWorkingTime)).BeginInit();
-
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.panel2.SuspendLayout();
-
             this.SuspendLayout();
             // 
             // imageList1
@@ -86,11 +79,9 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
-
             // statusBar1
             // 
-            this.statusBar1.Location = new System.Drawing.Point(20, 432);
-
+            this.statusBar1.Location = new System.Drawing.Point(20, 577);
             this.statusBar1.Name = "statusBar1";
             this.statusBar1.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.statusPanelMoving,
@@ -98,9 +89,7 @@
             this.statusPanelPassengersNumber,
             this.statusPanelWorkingTime});
             this.statusBar1.ShowPanels = true;
-
-            this.statusBar1.Size = new System.Drawing.Size(991, 22);
-
+            this.statusBar1.Size = new System.Drawing.Size(990, 22);
             this.statusBar1.TabIndex = 7;
             this.statusBar1.Text = "statusBar1";
             // 
@@ -130,7 +119,6 @@
             this.timerWorkingTime.Enabled = true;
             this.timerWorkingTime.Tick += new System.EventHandler(this.timerWorkingTime_Tick);
             // 
-
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -138,7 +126,6 @@
             this.panel1.Controls.Add(this.OutPutinformation);
             this.panel1.Controls.Add(this.MSExelButton);
             this.panel1.Controls.Add(this.MsWord);
-            this.panel1.Controls.Add(this.toScreen);
             this.panel1.Controls.Add(this.errorMessageCurrentFloor);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.StartParam);
@@ -161,7 +148,7 @@
             this.panel1.Controls.Add(this.NumberOfFloorsButton);
             this.panel1.Location = new System.Drawing.Point(12, 54);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(197, 372);
+            this.panel1.Size = new System.Drawing.Size(197, 517);
             this.panel1.TabIndex = 8;
             // 
             // errorMessageNecFloor
@@ -185,9 +172,9 @@
             // MSExelButton
             // 
             this.MSExelButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.MSExelButton.Location = new System.Drawing.Point(136, 339);
+            this.MSExelButton.Location = new System.Drawing.Point(101, 340);
             this.MSExelButton.Name = "MSExelButton";
-            this.MSExelButton.Size = new System.Drawing.Size(56, 23);
+            this.MSExelButton.Size = new System.Drawing.Size(75, 23);
             this.MSExelButton.TabIndex = 22;
             this.MSExelButton.Text = "Exel";
             this.MSExelButton.UseVisualStyleBackColor = false;
@@ -195,22 +182,12 @@
             // MsWord
             // 
             this.MsWord.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.MsWord.Location = new System.Drawing.Point(68, 339);
+            this.MsWord.Location = new System.Drawing.Point(15, 340);
             this.MsWord.Name = "MsWord";
-            this.MsWord.Size = new System.Drawing.Size(53, 23);
+            this.MsWord.Size = new System.Drawing.Size(75, 23);
             this.MsWord.TabIndex = 21;
             this.MsWord.Text = "Word";
             this.MsWord.UseVisualStyleBackColor = false;
-            // 
-            // toScreen
-            // 
-            this.toScreen.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.toScreen.Location = new System.Drawing.Point(3, 339);
-            this.toScreen.Name = "toScreen";
-            this.toScreen.Size = new System.Drawing.Size(49, 23);
-            this.toScreen.TabIndex = 20;
-            this.toScreen.Text = "Screen";
-            this.toScreen.UseVisualStyleBackColor = false;
             // 
             // errorMessageCurrentFloor
             // 
@@ -316,7 +293,7 @@
             this.NumFloorLabel.Name = "NumFloorLabel";
             this.NumFloorLabel.Size = new System.Drawing.Size(117, 13);
             this.NumFloorLabel.TabIndex = 8;
-            this.NumFloorLabel.Text = "Number Of Foors (2-10)";
+            this.NumFloorLabel.Text = "Number Of Foors (5-10)";
             // 
             // StopButtoon
             // 
@@ -388,49 +365,40 @@
             this.NumberOfFloorsButton.Name = "NumberOfFloorsButton";
             this.NumberOfFloorsButton.Size = new System.Drawing.Size(58, 20);
             this.NumberOfFloorsButton.TabIndex = 0;
-            this.NumberOfFloorsButton.TextChanged += new System.EventHandler(this.TextChangeNumFloor);
-            // 
-            // vScrollBar1
-            // 
-            this.vScrollBar1.Location = new System.Drawing.Point(795, 0);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(10, 398);
-            this.vScrollBar1.TabIndex = 9;
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // panel2
+            // panelPaint
             // 
-            this.panel2.Controls.Add(this.vScrollBar1);
-            this.panel2.Location = new System.Drawing.Point(215, 25);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(805, 401);
-            this.panel2.TabIndex = 10;
+            this.panelPaint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.panelPaint.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelPaint.BackgroundImage")));
+            this.panelPaint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelPaint.Location = new System.Drawing.Point(215, 25);
+            this.panelPaint.Name = "panelPaint";
+            this.panelPaint.Size = new System.Drawing.Size(804, 546);
+            this.panelPaint.TabIndex = 10;
+            this.panelPaint.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintOnForm);
             // 
             // StartPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1031, 474);
-            this.Controls.Add(this.panel2);
+            this.ClientSize = new System.Drawing.Size(1030, 619);
+            this.Controls.Add(this.panelPaint);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusBar1);
             this.Name = "StartPage";
             this.Text = "Elevator Simulator";
-
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelMoving)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPaused)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPassengersNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelWorkingTime)).EndInit();
-
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
-
 
         }
 
@@ -446,7 +414,6 @@
         private System.Windows.Forms.Timer timerWorkingTime;
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.Button StopButtoon;
         private System.Windows.Forms.Button CreatePersonButton;
         private System.Windows.Forms.Button StartButton;
@@ -472,9 +439,7 @@
         private System.Windows.Forms.Label OutPutinformation;
         private System.Windows.Forms.Button MSExelButton;
         private System.Windows.Forms.Button MsWord;
-        private System.Windows.Forms.Button toScreen;
-        private System.Windows.Forms.Panel panel2;
-
+        private System.Windows.Forms.Panel panelPaint;
     }
 }
 

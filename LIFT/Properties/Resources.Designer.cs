@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LIFT.Properties
-{
-
-
+namespace LIFT.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,169 +22,212 @@ namespace LIFT.Properties
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
-
+    internal class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LIFT.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
             }
         }
-/*
-        internal static System.Drawing.Bitmap Building1
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Building1", resourceCulture);
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Floor {
+            get {
+                object obj = ResourceManager.GetObject("Floor", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static System.Drawing.Bitmap ForeverAlone
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("ForeverAlone", resourceCulture);
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Lift {
+            get {
+                object obj = ResourceManager.GetObject("Lift", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static System.Drawing.Bitmap Geek
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Geek", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        internal static System.Drawing.Bitmap LiftDoors_1
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LiftDoors_1 {
+            get {
                 object obj = ResourceManager.GetObject("LiftDoors_1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static System.Drawing.Bitmap LiftDoors_2
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LiftDoors_2 {
+            get {
                 object obj = ResourceManager.GetObject("LiftDoors_2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static System.Drawing.Bitmap LiftDoors_3
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LiftDoors_3 {
+            get {
                 object obj = ResourceManager.GetObject("LiftDoors_3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static System.Drawing.Bitmap LiftDoors_4
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LiftDoors_4 {
+            get {
                 object obj = ResourceManager.GetObject("LiftDoors_4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static System.Drawing.Bitmap LiftDoors_Closed
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LiftDoors_Closed {
+            get {
                 object obj = ResourceManager.GetObject("LiftDoors_Closed", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static System.Drawing.Bitmap LiftDoors_Open
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LiftDoors_Open {
+            get {
                 object obj = ResourceManager.GetObject("LiftDoors_Open", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static System.Drawing.Bitmap NoMan
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LiftDoors1 {
+            get {
+                object obj = ResourceManager.GetObject("LiftDoors1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NoMan {
+            get {
                 object obj = ResourceManager.GetObject("NoMan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static System.Drawing.Bitmap SheMad
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PassengerBody {
+            get {
+                object obj = ResourceManager.GetObject("PassengerBody", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SheMad {
+            get {
                 object obj = ResourceManager.GetObject("SheMad", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static System.Drawing.Bitmap SheSmartass
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SheSmartass {
+            get {
                 object obj = ResourceManager.GetObject("SheSmartass", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static System.Drawing.Bitmap SheSmile
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SheSmile {
+            get {
                 object obj = ResourceManager.GetObject("SheSmile", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static System.Drawing.Bitmap Smile
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Smile {
+            get {
                 object obj = ResourceManager.GetObject("Smile", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-        internal static System.Drawing.Bitmap TrollMan
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TrollMan {
+            get {
                 object obj = ResourceManager.GetObject("TrollMan", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        */
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TrollMan1 {
+            get {
+                object obj = ResourceManager.GetObject("TrollMan1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
