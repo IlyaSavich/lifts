@@ -13,8 +13,8 @@ namespace LIFT
     public partial class StartPage : MetroFramework.Forms.MetroForm
     {
 
-        private int NumberofLifts = 2;
-        private int NumberOfFloors = 10;
+        private int NumberofLifts;
+        private int NumberOfFloors;
         private int CurrentFloor;
         private int NecessaryFloor;
         private int PassengerWeight;
@@ -22,7 +22,11 @@ namespace LIFT
         public StartPage()
         {
             InitializeComponent();
-           
+            StopButtoon.Enabled = false;
+            CreatePersonButton.Enabled = false;
+            MsWord.Enabled = false;
+            toScreen.Enabled = false;
+            MSExelButton.Enabled = false;
             
         }
 
@@ -133,6 +137,12 @@ namespace LIFT
 
         private void StartButton_Click(object sender, EventArgs e)
         {
+            StartButton.Enabled = false;
+            StopButtoon.Enabled = true;
+            CreatePersonButton.Enabled = true;
+            MsWord.Enabled = true;
+            MSExelButton.Enabled = true;
+            toScreen.Enabled = true;
             IsPressedButton = true;
             Invalidate();
         }
@@ -177,7 +187,7 @@ namespace LIFT
             }
 
 
-            if (Weight.Text != "")
+            if (WeightButton.Text != "")
             {
                 if ((int.Parse(WeightButton.Text) <= 400) && (int.Parse(WeightButton.Text) >= 30))
                 {
@@ -210,6 +220,10 @@ namespace LIFT
 
         }
 
-       
+        private void StopButton(object sender, EventArgs e)
+        {
+
+            StopButtoon.Enabled = false;
+        }
     }
 }

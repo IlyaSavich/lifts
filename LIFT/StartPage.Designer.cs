@@ -315,6 +315,7 @@
             this.StopButtoon.TabIndex = 7;
             this.StopButtoon.Text = "Stop";
             this.StopButtoon.UseVisualStyleBackColor = false;
+            this.StopButtoon.Click += new System.EventHandler(this.StopButton);
             // 
             // CreatePersonButton
             // 
