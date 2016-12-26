@@ -1,9 +1,8 @@
 ﻿using System.Security.Authentication;
-using LIFT.LiftSystem.Passenger.Contracts;
 
 namespace LIFT.LiftSystem.Passenger
 {
-    public class Passenger : IPassenger
+    public class Passenger
     {
         public static readonly int StatusWaitOnFloor = 1;
         public static readonly int StatusOnNeccessaryFloor = 1;

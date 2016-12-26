@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using LIFT.LiftSystem.Lift.Contracts;
-using Timer = System.Timers.Timer;
 
 namespace LIFT.LiftSystem.Lift
 {
@@ -11,7 +9,7 @@ namespace LIFT.LiftSystem.Lift
      * This class working with lift substance. Lift delivering persons to his neccessary floors
      */
 
-    public class Lift : ILift
+    public class Lift
     {
         /**
          *   Contents MaxWeight of passengers in Lift
@@ -37,6 +35,16 @@ namespace LIFT.LiftSystem.Lift
         protected int Id;
 
         /**
+         * Flag that using in run for checking when the lift need to stop
+         */
+        protected bool Stopped;
+
+        /**
+         * Flag that using in run for checking when the lift need to pause
+         */
+        protected bool Paused;
+
+        /**
          * The current status of the lift
          */
         protected int _Status;
@@ -45,6 +53,8 @@ namespace LIFT.LiftSystem.Lift
         {
             get { return _Status; }
         }
+
+        protected int PreviousStatus;
 
 
         /**
@@ -63,11 +73,6 @@ namespace LIFT.LiftSystem.Lift
         protected int NeccessaryFloor;
 
         protected bool[] ButtonsInside;
-
-        /**
-         * The buttons inside the lift. It count depends on the number of floors in the building
-         */
-        protected List<bool> Buttons;
 
         /**
          * список Пассажиров в лифте добавить
@@ -93,25 +98,20 @@ namespace LIFT.LiftSystem.Lift
             AllPassengersInLift = new List<Passenger.Passenger>();
 
             Id = id;
-            _Status = StatusStandingCloseDoors;
-            _CurrentFloor = StartFloorNumber;
+            SetStartConfiguration();
 
             EventWrapper = Events.Event.GetInstance();
+        }
+
+        public void SetStartConfiguration()
+        {
+            _Status = StatusStandingCloseDoors;
+            _CurrentFloor = StartFloorNumber;
         }
 
         protected void TimerTask()
         {
             Thread.Sleep(TimeMovingBetweenFloors);
-        }
-
-        /**
-         * Set button inside lift.
-         * Lift will stop on this floor if it's on locate on his way or if the lift has no another route
-         */
-
-        public void SetButton(int floor)
-        {
-            Buttons[floor - 1] = true;
         }
 
         /**
@@ -151,6 +151,7 @@ namespace LIFT.LiftSystem.Lift
                 if (passenger.NecessaryFloor == CurrentFloor)
                 {
                     removePassengers.Add(passenger);
+                    InformationRepository.Add("total_moved_weight", passenger.Weight);
                 }
             }
 
@@ -169,6 +170,17 @@ namespace LIFT.LiftSystem.Lift
             return removePassengers;
         }
 
+        public void ExitAllPassengers()
+        {
+            foreach (Passenger.Passenger passenger in AllPassengersInLift)
+            {
+                passenger.ExitLift();
+                InformationRepository.Add("total_moved_weight", passenger.Weight);
+            }
+
+            AllPassengersInLift.Clear();
+        }
+
         /**
          * Call lift on floor
          */
@@ -178,17 +190,49 @@ namespace LIFT.LiftSystem.Lift
             FloorsCalls[floorNumber - 1] = true;
         }
 
+        public void ClearFloorCalls()
+        {
+            for (int i = 0; i < FloorsCalls.Length; i++)
+            {
+                FloorsCalls[i] = false;
+            }
+        }
+
+        public void UnactivateAllButtons()
+        {
+            for (int i = 0; i < ButtonsInside.Length; i++)
+            {
+                ButtonsInside[i] = false;
+            }
+        }
+
         /**
          * Lift run method
          */
-
-
 
         public void Run()
         {
             Console.WriteLine("Lift" + Id + ": Standing on " + CurrentFloor + " floor");
             while (true)
             {
+                while (Paused)
+                {
+                }
+
+                if (Stopped)
+                {
+                    _Status = StatusStandingOpenDoors;
+                    ExitAllPassengers();
+                    UnactivateAllButtons();
+                    ClearFloorCalls();
+                    _Status = StatusStandingCloseDoors;
+                    NeccessaryFloor = FloorNotCalled;
+
+                    Console.WriteLine("Lift" + Id + ": STOPPED on " + CurrentFloor + " floor");
+                    Stopped = false;
+                    break;
+                }
+
                 ActionByStatus();
             }
         }
@@ -206,7 +250,6 @@ namespace LIFT.LiftSystem.Lift
             else
             {
                 MovingActions();
-               
             }
         }
 
@@ -224,22 +267,33 @@ namespace LIFT.LiftSystem.Lift
             }
             else if (floorCalled != FloorNotCalled)
             {
+                UpdateTripsCountInfo();
                 NeccessaryFloor = floorCalled;
-                bool moveUp = CheckMoveUp(NeccessaryFloor);
-                int newStatus = moveUp ? StatusMoveUp : StatusMoveDown;
+                int newStatus = GetNewStatus(NeccessaryFloor);
 
                 ChangeStatus(newStatus);
 
                 Console.WriteLine("Lift" + Id + ": Start movement to " + NeccessaryFloor + " floor");
-
             }
+        }
+
+        protected int GetNewStatus(int neccessaryFloor)
+        {
+            if (neccessaryFloor == FloorNotCalled)
+            {
+                return FloorNotCalled;
+            }
+
+            bool moveUp = CheckMoveUp(neccessaryFloor);
+
+            return moveUp ? StatusMoveUp : StatusMoveDown;
         }
 
         /**
          * Do actions when lift moving
          */
 
-        protected void MovingActions() // TODO
+        protected void MovingActions()
         {
             Timer = Task.Factory.StartNew(TimerTask);
 
@@ -264,8 +318,8 @@ namespace LIFT.LiftSystem.Lift
         protected void StopOnFloor(bool isNeccessaryFloor = true)
         {
             Console.WriteLine("Lift" + Id + ": Stop on " + CurrentFloor + " floor");
+            PreviousStatus = ChangeStatus(StatusStandingOpenDoors);
             EventWrapper.FireLiftOnFloorEvent(Id, CurrentFloor);
-            int previousStatus = ChangeStatus(StatusStandingOpenDoors);
 
             try
             {
@@ -282,10 +336,26 @@ namespace LIFT.LiftSystem.Lift
                 }
                 else
                 {
-                    ChangeStatus(previousStatus);
+                    ChangeStatus(PreviousStatus);
                 }
 
                 Console.WriteLine("Lift" + Id + ": Standing on " + CurrentFloor + " floor");
+            }
+        }
+
+        protected void UpdateTripsCountInfo()
+        {
+            int newStatus = GetNewStatus(GetNeccessaryFloor());
+
+            if ((newStatus == StatusMoveDown || newStatus == StatusMoveUp) && newStatus != PreviousStatus)
+            {
+                InformationRepository.Increment("trips_count");
+
+                Console.WriteLine(AllPassengersInLift.Count);
+                if (AllPassengersInLift.Count == 0)
+                {
+                    InformationRepository.Increment("idle_trips_count");
+                }
             }
         }
 
@@ -387,6 +457,24 @@ namespace LIFT.LiftSystem.Lift
         public void PressButtonInside(int floorSelected)
         {
             ButtonsInside[floorSelected - 1] = true;
+        }
+
+        public void Stop()
+        {
+            Stopped = true;
+            Paused = false;
+        }
+
+        public void Pause()
+        {
+            Paused = true;
+            Console.WriteLine("Lift" + Id + ": PAUSED");
+        }
+
+        public void Resume()
+        {
+            Paused = false;
+            Console.WriteLine("Lift" + Id + ": RESUMED");
         }
     }
 }

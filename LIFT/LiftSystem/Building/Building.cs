@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Security.Authentication;
 using System.Threading;
 using System.Threading.Tasks;
-using LIFT.LiftSystem.Building.Contracts;
 
 namespace LIFT.LiftSystem.Building
 {
@@ -114,9 +112,48 @@ namespace LIFT.LiftSystem.Building
 
         public void Start()
         {
+            foreach (Lift.Lift lift in Lifts)
+            {
+                lift.SetStartConfiguration();
+            }
+
             foreach (Thread liftThread in LiftsThreads)
             {
                 liftThread.Start();
+            }
+        }
+
+        public void Stop()
+        {
+            foreach (Lift.Lift lift in Lifts)
+            {
+                lift.Stop();
+            }
+
+            for (int i = 0; i < FloorsCount; i++)
+            {
+                Passengers[i].Clear();
+
+                for (int j = 0; j < LiftsCount; j++)
+                {
+                    Buttons[i, j] = false;
+                }
+            }
+        }
+
+        public void Pause()
+        {
+            foreach (Lift.Lift lift in Lifts)
+            {
+                lift.Pause();
+            }
+        }
+
+        public void Resume()
+        {
+            foreach (Lift.Lift lift in Lifts)
+            {
+                lift.Resume();
             }
         }
 

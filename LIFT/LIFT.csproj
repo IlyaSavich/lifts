@@ -59,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LiftSystem\Events\Event.cs" />
-    <Compile Include="LiftSystem\Passenger\Contracts\IPassenger.cs" />
     <Compile Include="StartPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,8 +66,6 @@
       <DependentUpon>StartPage.cs</DependentUpon>
     </Compile>
     <Compile Include="LiftSystem\Building\Building.cs" />
-    <Compile Include="LiftSystem\Building\Contracts\IBuilding.cs" />
-    <Compile Include="LiftSystem\Lift\Contracts\ILift.cs" />
     <Compile Include="LiftSystem\Lift\Lift.cs" />
     <Compile Include="LiftSystem\Passenger\Passenger.cs" />
     <Compile Include="LiftSystem\LiftSystem.cs" />
