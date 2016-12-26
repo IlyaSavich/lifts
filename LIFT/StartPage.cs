@@ -32,13 +32,13 @@ namespace LIFT
         public StartPage()
         {
             InitializeComponent();
+            StartButton.Enabled = false;
             StopButtoon.Enabled = false;
             CreatePersonButton.Enabled = false;
             MsWord.Enabled = false;
             toScreen.Enabled = false;
             MSExelButton.Enabled = false;
-            
-
+            SavePerson.Enabled = false;
             EventWrapper = Event.GetInstance();
             SetEvents();
         }
@@ -47,6 +47,8 @@ namespace LIFT
         {
             EventWrapper.LiftOnFloorStop += EventLiftOnFloorStop;
         }
+
+
         private bool IsPaint = false;
         Bitmap door = new Bitmap(Properties.Resources.LiftDoors_1);
         protected void EventLiftOnFloorStop(int liftId, int floor)
@@ -58,8 +60,7 @@ namespace LIFT
             liftPaint = liftId;
             floorPaint = floor;
             
-            
-            
+
         }
 
         private void PaintLiftDoorOpen(Graphics g)
@@ -81,95 +82,100 @@ namespace LIFT
         }
         private void PaintLiftDoorClose(Graphics g)
         {
-            g.DrawImage(Properties.Resources.LiftDoors_4, 45 + liftPaint* 70, 505 - floorPaint * 55, 30, 40);
-            Thread.Sleep(100);
-            g.DrawImage(Properties.Resources.LiftDoors_3, 45 + liftPaint * 70, 505 - floorPaint * 55, 30, 40);
-            Thread.Sleep(100);
-            g.DrawImage(Properties.Resources.LiftDoors_2, 45 + liftPaint * 70, 505 - floorPaint * 55, 30, 40);
-            Thread.Sleep(100);
-            g.DrawImage(Properties.Resources.LiftDoors_1, 45 + liftPaint * 70, 505 - floorPaint * 55, 30, 40);
-            Thread.Sleep(100);
-            g.DrawImage(Properties.Resources.LiftDoors_Closed, 45 + liftPaint * 70, 505 - floorPaint * 55, 30, 40);
-            Thread.Sleep(100);
+            if (IsPaint)
+            {
+                g.DrawImage(Properties.Resources.LiftDoors_4, 45 + liftPaint * 70, 505 - (floorPaint-1 )* 55, 30, 40);
+                Thread.Sleep(100);
+                g.DrawImage(Properties.Resources.LiftDoors_3, 45 + liftPaint * 70, 505 - (floorPaint - 1) * 55, 30, 40);
+                Thread.Sleep(100);
+                g.DrawImage(Properties.Resources.LiftDoors_2, 45 + liftPaint * 70, 505 - (floorPaint - 1) * 55, 30, 40);
+                Thread.Sleep(100);
+                g.DrawImage(Properties.Resources.LiftDoors_1, 45 + liftPaint * 70, 505 - (floorPaint - 1) * 55, 30, 40);
+                Thread.Sleep(100);
+                g.DrawImage(Properties.Resources.LiftDoors_Closed, 45 + liftPaint * 70, 505 - (floorPaint - 1) * 55, 30, 40);
+                Thread.Sleep(100);
+            }
 
         }
 
         private void PaintFloor(Graphics g)
         {
-            if (IsPressedButton)
-            {
-                for (int i = 0; i < NumberOfFloors; i++)
-                    g.DrawImage(Properties.Resources.Floor, 12, 500 - i * 55, 734, 50);
-            }
+            if(IsPressedButton)
+            for (int i = 0; i < NumberOfFloors; i++)
+                g.DrawImage(Properties.Resources.Floor, 12, 500 - i * 55, 734, 50);
+
+                  
         }
 
         private void PaintLift(Graphics g)
         {
-            if (IsPressedButton)
-            {
-                for (int i = 0; i < NumberOfFloors; i++)
-                    for (int j = 0; j < NumberofLifts; j++)
-                        g.DrawImage(Properties.Resources.LiftDoors, 45 + j * 70, 505 - i * 55, 30, 40);
-            }
+           if(IsPressedButton)
+            for (int i = 0; i < NumberOfFloors; i++)
+                for (int j = 0; j < NumberofLifts; j++)
+                    g.DrawImage(Properties.Resources.LiftDoors, 45 + j * 70, 505 - i * 55, 30, 40);     
+          
         }
 
         private void PaintWell(Graphics g)
         {
-            if (IsPressedButton)
-            {
-                for (int i = 0; i < NumberofLifts; i++)
-                    g.DrawImage(Properties.Resources.well, 30 + i * 70, -5, 60, 734);
-            }
+            if(IsPressedButton)
+            for (int i = 0; i < NumberofLifts; i++)
+                g.DrawImage(Properties.Resources.well, 30 + i * 70, -5, 60, 734);
+           
         }
 
         private void PainOnForm(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            
-                PaintFloor(g);
-                PaintWell(g);
-                PaintLift(g);
-           
-                PainPassenger(g);
-                  
-          
+            PaintFloor(g);
+            PaintWell(g);
+            PaintLift(g);   
+         
         }
+        
+        private void paintyghv(object sender, PaintEventArgs e)
+        {
+
+
+
+            Graphics g = e.Graphics;
+            PaintFloor(g);
+            PaintWell(g);
+            PaintLift(g);
+        }
+
+
         private void PaintonFormLift(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            if (IsPaint)
-            {
-                PaintLiftDoorOpen(g);
-            }
+            PaintLiftDoorOpen(g);
+            Thread.Sleep(100);
+            PaintLiftDoorClose(g);
+            
+
         }
 
 
         Bitmap man = new Bitmap(Properties.Resources.TrollMan);
-        private void PainPassenger(Graphics g)
+     /*   private void PainPassenger(Graphics g, int currentfloor, int necessaryfloor)
         {
-            if (IsPaintPassenger)
-            {
-                g.DrawImage(man, 500, 605, 30, 40);
-                for (int i = 0; i <= 10; i++)
-                {
-
-                    Thread.Sleep(100);
-
-
-                }
-            }
+            
         }
+        */
+        
+
 
 
 
         private void timerWorkingTime_Tick(object sender, EventArgs e)
         {
             statusPanelWorkingTime.Text = DateTime.Now.ToString("HH:mm:ss"); // TODO show time from start system
-        }             
+        }
 
-      
+
 
         #region checkInputParam
+
         private void SaveButton_Click(object sender, EventArgs e)
         {
 
@@ -211,25 +217,26 @@ namespace LIFT
             {
                 errorMessageLift.Text = "Input data";
             }
-            
+            if ((errorMessageNumFloor.Text == "") && (errorMessageLift.Text == ""))
+            {
+                StartButton.Enabled = true;
+            }
+
 
         }
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            StartButton.Enabled = false;
             StopButtoon.Enabled = true;
             CreatePersonButton.Enabled = true;
             MsWord.Enabled = true;
             MSExelButton.Enabled = true;
             toScreen.Enabled = true;
             IsPressedButton = true;
+            SavePerson.Enabled = true;
             this.liftSystem = new LiftSystem.LiftSystem(this.NumberOfFloors, this.NumberofLifts);
-
             liftSystem.Start();
-      
-         //   liftSystem/
-            // Invalidate();
+
         }
         private void SavePerson_Click(object sender, EventArgs e)
         {
@@ -286,21 +293,28 @@ namespace LIFT
             {
                 errorMessageWeight.Text = "Input data";
             }
+
+
+
+            if ((errorMessageWeight.Text == "") && (errorMessageCurrentFloor.Text =="") &&(errorMessageNecFloor.Text == ""))
+            {
+                SavePerson.Enabled = true;
+            }
+
         }
 
 
         private void CreatePersonButton_Click(object sender, EventArgs e)
         {
 
-        //    liftSystem.CreatePassenger(PassengerWeight,NecessaryFloor,CurrentFloor);
           
               if ((errorMessageCurrentFloor.Text == "") && (errorMessageNecFloor.Text == "") && (errorMessageWeight.Text == ""))
               {
                  liftSystem.CreatePassenger(PassengerWeight,  CurrentFloor ,NecessaryFloor);
                   IsPaintPassenger = true;
-                               }
+                         }
         }
-        #endregion checkInPutParam
+        
         private void StopButton(object sender, EventArgs e)
         {
 
@@ -309,6 +323,9 @@ namespace LIFT
             CreatePersonButton.Enabled = false;
 
         }
+
+
+        #endregion checkInPutParam
 
        
     }

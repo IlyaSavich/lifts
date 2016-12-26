@@ -401,9 +401,9 @@
             // 
             this.panel2.BackgroundImage = global::LIFT.Properties.Resources.Bak;
             this.panel2.Controls.Add(this.panelforlift);
-            this.panel2.Location = new System.Drawing.Point(215, 25);
+            this.panel2.Location = new System.Drawing.Point(215, 26);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(805, 583);
+            this.panel2.Size = new System.Drawing.Size(805, 582);
             this.panel2.TabIndex = 10;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.PainOnForm);
             // 
@@ -426,6 +426,7 @@
             this.Controls.Add(this.statusBar1);
             this.Name = "StartPage";
             this.Text = "Elevator Simulator";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.paintyghv);
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelMoving)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPaused)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPassengersNumber)).EndInit();
