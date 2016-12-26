@@ -32,6 +32,10 @@ namespace LIFT.LiftSystem
          */
         protected int Status;
 
+        public delegate void EventLiftOnFloorStop(int liftId, int floor);
+        public delegate void EventLiftOnFloorStart(int liftId, int floor);
+
+
         public LiftSystem(int floorsCount, int liftsCount)
         {
             Building = new Building.Building(floorsCount, liftsCount);
@@ -62,6 +66,10 @@ namespace LIFT.LiftSystem
             Thread.Sleep(PassengerPressBtnTime);
             Building.PressButton(passenger);
         }
+
+      
+
+
 
         /**
          * Init building and lifts.

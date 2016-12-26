@@ -20,7 +20,7 @@ namespace LIFT
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StartPage());
 
-            LiftSystem.LiftSystem liftSystem = new LiftSystem.LiftSystem(5, 2);
+        /*    LiftSystem.LiftSystem liftSystem = new LiftSystem.LiftSystem(5, 2);
             liftSystem.Start();
             liftSystem.CreatePassenger(80, 3, 5);
             liftSystem.CreatePassenger(80, 2, 5);
@@ -28,7 +28,7 @@ namespace LIFT
             liftSystem.CreatePassenger(80, 4, 3);
             liftSystem.CreatePassenger(80, 5, 1);
             liftSystem.CreatePassenger(80, 1, 2);
-            Thread.Sleep(Timeout.Infinite);
+            Thread.Sleep(Timeout.Infinite);*/
         }
     }
 }

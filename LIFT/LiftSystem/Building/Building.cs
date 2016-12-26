@@ -12,7 +12,7 @@ namespace LIFT.LiftSystem.Building
      * This class works with substance   s    to building: lifts, buttons on floors, persons on floors
      */
 
-    public class Building : IBuilding
+    public class Building
     {
         public static readonly int TimePassengerMovement = 2000;
 
@@ -51,9 +51,13 @@ namespace LIFT.LiftSystem.Building
          */
         public static Task Timer;
 
+        public Events.Event EventWrapper;
+
         public Building(int floorsCount, int liftsCount)
         {
             Init(floorsCount, liftsCount);
+            InitLifts();
+            SetEvents();
         }
 
         protected void TimerTask()
@@ -65,6 +69,7 @@ namespace LIFT.LiftSystem.Building
         {
             FloorsCount = floorsCount;
             LiftsCount = liftsCount;
+            EventWrapper = Events.Event.GetInstance();
 
             Passengers = new List<Passenger.Passenger>[floorsCount];
             for (int i = 0; i < floorsCount; i++)
@@ -74,19 +79,17 @@ namespace LIFT.LiftSystem.Building
             Lifts = new Lift.Lift[liftsCount];
             LiftsThreads = new Thread[liftsCount];
             Buttons = new bool[floorsCount, liftsCount];
-
-            InitLifts();
         }
 
         /**
          * Init rub thread method for each lift. Starting threads
          */
 
-        protected void InitLifts()
+        public void InitLifts()
         {
             for (int i = 0; i < Lifts.Length; i++)
             {
-                Lifts[i] = new Lift.Lift(i, FloorsCount, LiftEventOnFloorStop);
+                Lifts[i] = new Lift.Lift(i, FloorsCount);
 
                 try
                 {
@@ -98,6 +101,11 @@ namespace LIFT.LiftSystem.Building
                     Environment.Exit(-1);
                 }
             }
+        }
+
+        protected void SetEvents()
+        {
+            EventWrapper.LiftOnFloorStop += LiftEventOnFloorStop;
         }
 
         /**
@@ -139,7 +147,7 @@ namespace LIFT.LiftSystem.Building
             Passengers[passenger.CurrentFloor - 1].Add(passenger);
         }
 
-        public void LiftEventOnFloorStop(int liftId)
+        public void LiftEventOnFloorStop(int liftId, int floor)
         {
             ExitLift(Lifts[liftId]);
             SetPassengersToLift(Lifts[liftId]);

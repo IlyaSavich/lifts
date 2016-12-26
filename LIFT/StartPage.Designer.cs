@@ -38,6 +38,7 @@
             this.statusPanelWorkingTime = new System.Windows.Forms.StatusBarPanel();
             this.timerWorkingTime = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.SavePerson = new System.Windows.Forms.Button();
             this.errorMessageNecFloor = new System.Windows.Forms.TextBox();
             this.OutPutinformation = new System.Windows.Forms.Label();
             this.MSExelButton = new System.Windows.Forms.Button();
@@ -65,12 +66,14 @@
             this.NumberOfFloorsButton = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panelforlift = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelMoving)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPaused)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPassengersNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelWorkingTime)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -122,6 +125,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel1.Controls.Add(this.SavePerson);
             this.panel1.Controls.Add(this.errorMessageNecFloor);
             this.panel1.Controls.Add(this.OutPutinformation);
             this.panel1.Controls.Add(this.MSExelButton);
@@ -151,6 +155,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(197, 554);
             this.panel1.TabIndex = 8;
+            // 
+            // SavePerson
+            // 
+            this.SavePerson.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.SavePerson.Location = new System.Drawing.Point(9, 298);
+            this.SavePerson.Name = "SavePerson";
+            this.SavePerson.Size = new System.Drawing.Size(75, 23);
+            this.SavePerson.TabIndex = 25;
+            this.SavePerson.Text = "Save";
+            this.SavePerson.UseVisualStyleBackColor = false;
+            this.SavePerson.Click += new System.EventHandler(this.SavePerson_Click);
             // 
             // errorMessageNecFloor
             // 
@@ -309,7 +324,7 @@
             // StopButtoon
             // 
             this.StopButtoon.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.StopButtoon.Location = new System.Drawing.Point(15, 298);
+            this.StopButtoon.Location = new System.Drawing.Point(61, 368);
             this.StopButtoon.Name = "StopButtoon";
             this.StopButtoon.Size = new System.Drawing.Size(75, 23);
             this.StopButtoon.TabIndex = 7;
@@ -385,11 +400,21 @@
             // panel2
             // 
             this.panel2.BackgroundImage = global::LIFT.Properties.Resources.Bak;
+            this.panel2.Controls.Add(this.panelforlift);
             this.panel2.Location = new System.Drawing.Point(215, 25);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(805, 583);
             this.panel2.TabIndex = 10;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.PainOnForm);
+            // 
+            // panelforlift
+            // 
+            this.panelforlift.BackColor = System.Drawing.Color.Transparent;
+            this.panelforlift.Location = new System.Drawing.Point(0, 0);
+            this.panelforlift.Name = "panelforlift";
+            this.panelforlift.Size = new System.Drawing.Size(805, 583);
+            this.panelforlift.TabIndex = 0;
+            this.panelforlift.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintonFormLift);
             // 
             // StartPage
             // 
@@ -408,6 +433,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -451,7 +477,8 @@
         private System.Windows.Forms.Button MsWord;
         private System.Windows.Forms.Button toScreen;
         private System.Windows.Forms.Panel panel2;
-
+        private System.Windows.Forms.Button SavePerson;
+        private System.Windows.Forms.Panel panelforlift;
     }
 }
 

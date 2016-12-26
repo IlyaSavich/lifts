@@ -84,11 +84,9 @@ namespace LIFT.LiftSystem.Lift
          */
         public static Task Timer;
 
-        public delegate void EventOnFloorStop(int liftId);
+        protected Events.Event EventWrapper;
 
-        public event EventOnFloorStop OnFloorStop;
-
-        public Lift(int id, int floorsCount, EventOnFloorStop eventCallbackOnFloorStop)
+        public Lift(int id, int floorsCount)
         {
             FloorsCalls = new bool[floorsCount];
             ButtonsInside = new bool[floorsCount];
@@ -98,7 +96,7 @@ namespace LIFT.LiftSystem.Lift
             _Status = StatusStandingCloseDoors;
             _CurrentFloor = StartFloorNumber;
 
-            OnFloorStop += eventCallbackOnFloorStop;
+            EventWrapper = Events.Event.GetInstance();
         }
 
         protected void TimerTask()
@@ -184,6 +182,8 @@ namespace LIFT.LiftSystem.Lift
          * Lift run method
          */
 
+
+
         public void Run()
         {
             Console.WriteLine("Lift" + Id + ": Standing on " + CurrentFloor + " floor");
@@ -206,6 +206,7 @@ namespace LIFT.LiftSystem.Lift
             else
             {
                 MovingActions();
+               
             }
         }
 
@@ -230,6 +231,7 @@ namespace LIFT.LiftSystem.Lift
                 ChangeStatus(newStatus);
 
                 Console.WriteLine("Lift" + Id + ": Start movement to " + NeccessaryFloor + " floor");
+
             }
         }
 
@@ -262,7 +264,7 @@ namespace LIFT.LiftSystem.Lift
         protected void StopOnFloor(bool isNeccessaryFloor = true)
         {
             Console.WriteLine("Lift" + Id + ": Stop on " + CurrentFloor + " floor");
-            OnFloorStop?.Invoke(Id);
+            EventWrapper.FireLiftOnFloorEvent(Id, CurrentFloor);
             int previousStatus = ChangeStatus(StatusStandingOpenDoors);
 
             try
