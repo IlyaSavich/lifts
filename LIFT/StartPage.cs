@@ -133,23 +133,14 @@ namespace LIFT
          
         }
         
-        private void paintyghv(object sender, PaintEventArgs e)
-        {
-
-
-
-            Graphics g = e.Graphics;
-            PaintFloor(g);
-            PaintWell(g);
-            PaintLift(g);
-        }
+     
 
 
         private void PaintonFormLift(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             PaintLiftDoorOpen(g);
-            Thread.Sleep(100);
+            Thread.Sleep(1000);
             PaintLiftDoorClose(g);
             
 
@@ -157,11 +148,14 @@ namespace LIFT
 
 
         Bitmap man = new Bitmap(Properties.Resources.TrollMan);
-     /*   private void PainPassenger(Graphics g, int currentfloor, int necessaryfloor)
+        private void PainPassenger(Graphics g, int currentfloor, int necessaryfloor)
         {
-            
+            int x=-10;
+            if (IsPressedButton)
+                       g.DrawImage(Properties.Resources.LiftDoors, 45 + currentfloor * 70, 505 +x, 30, 40);
+
         }
-        */
+        
         
 
 

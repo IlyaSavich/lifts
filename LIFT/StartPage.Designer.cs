@@ -426,7 +426,7 @@
             this.Controls.Add(this.statusBar1);
             this.Name = "StartPage";
             this.Text = "Elevator Simulator";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.paintyghv);
+//            this.Paint += new System.Windows.Forms.PaintEventHandler(this.paintyghv);
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelMoving)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPaused)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPassengersNumber)).EndInit();
