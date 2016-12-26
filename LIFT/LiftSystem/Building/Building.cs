@@ -241,5 +241,44 @@ namespace LIFT.LiftSystem.Building
                     "Passenger neccesary floor is invalid. Building has no such floors. " + passenger.NecessaryFloor);
             }
         }
+
+        public int CountMovingLifts()
+        {
+            int count = 0;
+            foreach (Lift.Lift lift in Lifts)
+            {
+                if (lift.Status == Lift.Lift.StatusMoveDown || lift.Status == Lift.Lift.StatusMoveUp)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        public int CountStandingLifts()
+        {
+            int count = 0;
+            foreach (Lift.Lift lift in Lifts)
+            {
+                if (lift.Status == Lift.Lift.StatusStandingOpenDoors || lift.Status == Lift.Lift.StatusStandingCloseDoors)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        public int CountPassengersInLifts()
+        {
+            int count = 0;
+            foreach (Lift.Lift lift in Lifts)
+            {
+                count += lift.CountPassengers();
+            }
+
+            return count;
+        }
     }
 }

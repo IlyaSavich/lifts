@@ -70,11 +70,6 @@ namespace LIFT.LiftSystem
             InformationRepository.Increment("created_passengers_count");
         }
 
-
-/**
-                 * Init building and lifts.
-                 */
-
         public void Init(int floorsCount, int liftsCount)
         {
             if (Status != StatusStop && Status != StatusPause)
@@ -143,6 +138,30 @@ namespace LIFT.LiftSystem
             Status = StatusActive;
 
             Building.Resume();
+        }
+
+        public int CountMovingLifts()
+        {
+            return Building.CountMovingLifts();
+        }
+
+        public int CountStandingLifts()
+        {
+            return Building.CountStandingLifts();
+        }
+
+        public int CountPassengers()
+        {
+            int count = 0;
+
+            if (InformationRepository.Has("passengers_count"))
+            {
+                count += int.Parse(InformationRepository.Get("passengers_count"));
+            }
+
+            count += Building.CountPassengersInLifts();
+
+            return count;
         }
     }
 }

@@ -152,6 +152,7 @@ namespace LIFT.LiftSystem.Lift
                 {
                     removePassengers.Add(passenger);
                     InformationRepository.Add("total_moved_weight", passenger.Weight);
+                    InformationRepository.Increment("passengers_count");
                 }
             }
 
@@ -176,6 +177,7 @@ namespace LIFT.LiftSystem.Lift
             {
                 passenger.ExitLift();
                 InformationRepository.Add("total_moved_weight", passenger.Weight);
+                InformationRepository.Increment("passengers_count");
             }
 
             AllPassengersInLift.Clear();
@@ -350,8 +352,7 @@ namespace LIFT.LiftSystem.Lift
             if ((newStatus == StatusMoveDown || newStatus == StatusMoveUp) && newStatus != PreviousStatus)
             {
                 InformationRepository.Increment("trips_count");
-
-                Console.WriteLine(AllPassengersInLift.Count);
+                
                 if (AllPassengersInLift.Count == 0)
                 {
                     InformationRepository.Increment("idle_trips_count");
@@ -475,6 +476,11 @@ namespace LIFT.LiftSystem.Lift
         {
             Paused = false;
             Console.WriteLine("Lift" + Id + ": RESUMED");
+        }
+
+        public int CountPassengers()
+        {
+            return AllPassengersInLift.Count;
         }
     }
 }

@@ -37,14 +37,11 @@ namespace LIFT
             liftSystem.CreatePassenger(80, 4, 3);
             liftSystem.CreatePassenger(80, 5, 1);
             liftSystem.CreatePassenger(80, 1, 2);
-            
+
             Thread.Sleep(4000);
             liftSystem.Stop();
             Thread.Sleep(6000);
-            Console.WriteLine(InformationRepository.Get("trips_count"));
-            Console.WriteLine(InformationRepository.Get("idle_trips_count"));
-            Console.WriteLine(InformationRepository.Get("total_moved_weight"));
-            Console.WriteLine(InformationRepository.Get("created_passengers_count"));
+            Console.WriteLine(liftSystem.CountPassengers());
             Thread.Sleep(Timeout.Infinite);
         }
     }
