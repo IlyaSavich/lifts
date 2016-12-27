@@ -20,7 +20,7 @@ namespace LIFT
 
         private int NumberofLifts;
         private int NumberOfFloors;
-        private int CurrentFloor = 2;
+        private int CurrentFloor =10;
         private int NecessaryFloor = 1;
         private int PassengerWeight = 80;
         private bool IsPressedButton = false;
@@ -29,7 +29,7 @@ namespace LIFT
         private bool IsPaintPassenger = false;
         private int liftPaint;
         private int floorPaint;
-        private int _point;
+      
 
 
 
@@ -44,6 +44,7 @@ namespace LIFT
             MSExelButton.Enabled = false;
             SavePerson.Enabled = false;
             EventWrapper = Event.GetInstance();
+            this.DoubleBuffered = true;
             SetEvents();
         }
 
@@ -143,10 +144,11 @@ namespace LIFT
         private void PaintonFormLift(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
+            PainPassenger(g, CurrentFloor);
             PaintLiftDoorOpen(g);
             Thread.Sleep(1000);
             PaintLiftDoorClose(g);
-            PainPassenger(g);
+           
           
             
 
@@ -157,29 +159,31 @@ namespace LIFT
       
 
         Bitmap man = new Bitmap(Properties.Resources.TrollMan);
-        private void PainPassenger(Graphics g)
+        private void PainPassenger(Graphics g, int floor)
         {
             int x = 10;
             if (IsPaintPassenger)
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 50; i++)
                 {
                   
-                    g.DrawImage(Properties.Resources.TrollMan, 80+x, 505, 30, 40);
-                    Thread.Sleep(50);
-                                 
-                    
+                    g.DrawImage(Properties.Resources.TrollMan, 700-x,610- 55*floor, 30, 40);
+                    Thread.Sleep(10);
+                    if(i!=49)
+                        g.DrawImage(Properties.Resources.SheSmile, 700-x, 610-55*floor, 50, 50);
                     x +=10;
                     this.Invalidate();
-                    
+                    Application.DoEvents();
+
                 }
             
             
             
 
         }
-       
+      
 
-    
+
+
 
 
 
@@ -342,6 +346,7 @@ namespace LIFT
             CreatePersonButton.Enabled = false;
 
         }
+
 
 
 

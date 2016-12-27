@@ -13,6 +13,9 @@ namespace LIFT.LiftSystem.Events
         public event EventLiftOnFloorStart LiftOnFloorStart;
 
 
+        public delegate void EventAddPassen(int liftId, int floor, int current);
+        public event EventAddPassen AddPAsse;
+
         private Event() { }
 
         public static Event GetInstance()
@@ -44,6 +47,17 @@ namespace LIFT.LiftSystem.Events
                 handle(liftId, floor);
             }
         }
+
+        public void FireAddPassenger(int liftId, int floor, int current)
+        {
+            EventAddPassen  handle = AddPAsse;
+
+            if (handle != null)
+            {
+                handle(liftId, floor, current);
+            }
+        }
+
 
 
 

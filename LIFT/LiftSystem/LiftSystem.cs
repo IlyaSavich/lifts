@@ -36,6 +36,8 @@ namespace LIFT.LiftSystem
 
         public delegate void EventLiftOnFloorStart(int liftId, int floor);
 
+        public delegate void EventAddPassen(int liftId, int floor, int current);
+
 
         public LiftSystem(int floorsCount, int liftsCount)
         {

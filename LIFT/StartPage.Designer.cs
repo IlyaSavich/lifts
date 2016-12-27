@@ -416,7 +416,10 @@
             this.panelforlift.Size = new System.Drawing.Size(805, 583);
             this.panelforlift.TabIndex = 0;
             this.panelforlift.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintonFormLift);
-
+            // 
+            // timer1
+            // 
+//            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // StartPage
             // 
