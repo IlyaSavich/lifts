@@ -204,6 +204,7 @@ namespace LIFT.LiftSystem.Building
 
             foreach (Passenger.Passenger passenger in removePassengers)
             {
+                EventWrapper.FirePassengerDelivered(passenger.Id);
                 Passengers[currentFloor - 1].Remove(passenger);
             }
         }

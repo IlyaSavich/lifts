@@ -1,10 +1,8 @@
-﻿using System.Windows.Forms;
-
-namespace LIFT.LiftSystem.Events
+﻿namespace LIFT.LiftSystem.Events
 {
     public class Event
     {
-        private static Event Instance = null;
+        private static Event _instance;
 
         public delegate void EventLiftOnFloorStop(int liftId, int floor);
         public event EventLiftOnFloorStop LiftOnFloorStop;
@@ -12,43 +10,34 @@ namespace LIFT.LiftSystem.Events
         public delegate void EventLiftOnFloorStart(int liftId, int floor);
         public event EventLiftOnFloorStart LiftOnFloorStart;
 
+        public delegate void EventPassengerDelivered(int passengerId);
+        public event EventPassengerDelivered PassengerDelivered;
 
         private Event() { }
 
         public static Event GetInstance()
         {
-            if (Event.Instance == null)
+            if (_instance == null)
             {
-                Event.Instance = new Event();
+                _instance = new Event();
             }
 
-            return Event.Instance;
+            return _instance;
         }
 
         public void FireLiftOnFloorEvent(int liftId, int floor)
         {
-            EventLiftOnFloorStop handle = LiftOnFloorStop;
-
-            if (handle != null)
-            {
-                handle(liftId,floor);
-            }
+            LiftOnFloorStop?.Invoke(liftId, floor);
         }
 
         public void FireLiftOnFloorStartEvent(int liftId, int floor)
         {
-            EventLiftOnFloorStart handle = LiftOnFloorStart;
-
-            if (handle != null)
-            {
-                handle(liftId, floor);
-            }
+            LiftOnFloorStart?.Invoke(liftId, floor);
         }
 
-
-
-
-
-
+        public void FirePassengerDelivered(int passengerId)
+        {
+            PassengerDelivered?.Invoke(passengerId);
+        }
     }
 }
