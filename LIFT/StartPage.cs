@@ -136,16 +136,15 @@ namespace LIFT
         private void PaintonFormLift(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            //   PainPassengerGo(g,CurrentFloor);
-
+            PainPassengerGo(g,CurrentFloor);
             PaintLiftDoorOpen(g);
-            Thread.Sleep(1000);
+            Thread.Sleep(100);
             PaintLiftDoorClose(g);
-            //     PainPassengerLeave(g, NecessaryFloor);
+            PainPassengerLeave(g, NecessaryFloor);
         }
 
 
-/*
+
                                 Bitmap man = new Bitmap(Properties.Resources.TrollMan);
                                 private void PainPassengerGo(Graphics g, int floor)
                                 {
@@ -154,10 +153,10 @@ namespace LIFT
                                         for (int i = 0; i < 50; i++)
                                         {
                 
-                                            g.DrawImage(Properties.Resources.TrollMan, 700 - x, 610 - 55 * floor, 30, 40);
+                                            g.DrawImage(Properties.Resources.TrollMan, 600 - x, 550 - 55 * floor, 30, 40);
                                             Thread.Sleep(10);
                                             if (i != 49)
-                                                g.DrawImage(Properties.Resources.SheSmile, 700 - x, 610 - 55 * floor, 45, 45);
+                                                g.DrawImage(Properties.Resources.SheSmile, 600 - x, 550 - 55 * floor, 45, 45);
                                             x += 10;
                 
                 
@@ -170,14 +169,16 @@ namespace LIFT
                                         for (int i = 0; i < 50; i++)
                                         {
                 
-                                            g.DrawImage(Properties.Resources.TrollMan, 45+x, 610 - 55 * floor, 30, 40);
+                                            g.DrawImage(Properties.Resources.TrollMan, 45+x, 550 - 55 * floor, 30, 40);
                                             Thread.Sleep(10);
                                             if (i != 49)
-                                                g.DrawImage(Properties.Resources.SheSmile, 45+x, 610 - 55 * floor, 45, 45);
+                                            g.DrawImage(Properties.Resources.SheSmile, 45+x, 550 - 55 * floor, 70, 45);
+                                                
                                             if (i == 49)
                                             {
-                                                Thread.Sleep(100);
-                                                g.DrawImage(Properties.Resources.SheSmile, 45 + x, 610 - 55 * floor, 60, 45);
+                                                Thread.Sleep(200);
+                                                g.DrawImage(Properties.Resources.SheSmile, 45 + x, 550 - 55 * floor, 60, 45);
+                        
                                             }
                                             x += 10;
                 
@@ -190,7 +191,7 @@ namespace LIFT
                                 }
                 
                 
-                                */
+                              
 
 
         private void timerWorkingTime_Tick(object sender, EventArgs e)
