@@ -12,10 +12,10 @@ namespace LIFT.LiftSystem
     {
         public static readonly Hashtable InfoNames = new Hashtable()
         {
-            {"total_moved_weight", "Total moved weight" },
-            {"passengers_count", "Passengers count" },
-            {"trips_count", "Trips count" },
-            {"idle_trips_count", "Idle trips count" }
+            {"total_moved_weight", "Total moved weight"},
+            {"passengers_count", "Passengers count"},
+            {"trips_count", "Trips count"},
+            {"idle_trips_count", "Idle trips count"}
         };
 
         /**
@@ -94,6 +94,51 @@ namespace LIFT.LiftSystem
             output += InfoNames["idle_trips_count"] + ": " + Get("idle_trips_count") + "\n";
 
             return output;
+        }
+
+        public static void PrintWord(string path = @"c:\lift.docx")
+        {
+            Microsoft.Office.Interop.Word.Application winword = new Microsoft.Office.Interop.Word.Application();
+
+            //Create a missing variable for missing value
+            object missing = System.Reflection.Missing.Value;
+
+            //Create a new document
+            Microsoft.Office.Interop.Word.Document document = winword.Documents.Add(ref missing, ref missing,
+                ref missing, ref missing);
+
+            document.Content.SetRange(0, 0);
+            document.Content.Text = OutInfo();
+
+            object filename = path;
+            document.SaveAs2(ref filename);
+            document.Close(ref missing, ref missing, ref missing);
+            document = null;
+            winword.Quit(ref missing, ref missing, ref missing);
+            winword = null;
+        }
+
+        public static void PrintExcel(string path = @"c:\lift.xls")
+        {
+            Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+            object missing = System.Reflection.Missing.Value;
+            var xlWorkBook = xlApp.Workbooks.Add(missing);
+
+            //Create a new document
+            var document = (Microsoft.Office.Interop.Excel.Worksheet) xlWorkBook.Worksheets.get_Item(1);
+
+            document.Cells[1, 1] = InfoNames["total_moved_weight"];
+            document.Cells[1, 2] = Get("total_moved_weight");
+            document.Cells[2, 1] = InfoNames["passengers_count"];
+            document.Cells[2, 2] = Get("passengers_count");
+            document.Cells[3, 1] = InfoNames["trips_count"];
+            document.Cells[3, 2] = Get("trips_count");
+            document.Cells[4, 1] = InfoNames["idle_trips_count"];
+            document.Cells[4, 2] = Get("idle_trips_count");
+
+            xlWorkBook.SaveAs(path, Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal, missing, missing, missing, missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, missing, missing, missing, missing, missing);
+            xlWorkBook.Close(true, missing, missing);
+            xlApp.Quit();
         }
     }
 }

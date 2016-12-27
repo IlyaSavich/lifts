@@ -372,16 +372,13 @@ namespace LIFT
         private void StopButton(object sender, EventArgs e)
         {
             StopButtoon.Enabled = false;
-            StartButton.Enabled = true;
+            StartButton.Enabled = false;
+            SaveButton.Enabled = false;
             CreatePersonButton.Enabled = false;
             liftSystem.Stop();
         }
 
         #endregion checkInPutParam
-
-        private void MsWord_Click(object sender, EventArgs e)
-        {
-        }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -398,6 +395,16 @@ namespace LIFT
         {
             string text = InformationRepository.OutInfo();
             MessageBox.Show(text);
+        }
+
+        private void MsWord_Click(object sender, EventArgs e)
+        {
+            InformationRepository.PrintWord();
+        }
+
+        private void MSExelButton_Click(object sender, EventArgs e)
+        {
+            InformationRepository.PrintExcel();
         }
     }
 }

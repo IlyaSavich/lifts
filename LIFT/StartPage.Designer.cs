@@ -275,6 +275,7 @@
             this.MSExelButton.TabIndex = 22;
             this.MSExelButton.Text = "Exel";
             this.MSExelButton.UseVisualStyleBackColor = false;
+            this.MSExelButton.Click += new System.EventHandler(this.MSExelButton_Click);
             // 
             // MsWord
             // 
