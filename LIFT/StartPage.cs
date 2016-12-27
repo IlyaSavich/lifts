@@ -53,9 +53,6 @@ namespace LIFT
         Bitmap door = new Bitmap(Properties.Resources.LiftDoors_1);
         protected void EventLiftOnFloorStop(int liftId, int floor)
         {
-
-             
-            Console.WriteLine("ON FLOOR STOP " + liftId);
             IsPaint = true;
             liftPaint = liftId;
             floorPaint = floor;

@@ -16,33 +16,32 @@ namespace LIFT
         [STAThread]
         static void Main()
         {
-            /*Application.EnableVisualStyles();
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StartPage());*/
+            Application.Run(new StartPage());/**/
 
-            /*InformationRepository.Update("name", "Jack");
-            Console.WriteLine(InformationRepository.Get("name"));
-            InformationRepository.Update("name", "John");
-            Console.WriteLine(InformationRepository.Get("name"));
-            InformationRepository.Update("id", "123");
-            Console.WriteLine(InformationRepository.Add("id", 1));
-            Console.WriteLine(InformationRepository.Add("name", 2));
-            Console.WriteLine(InformationRepository.Add("price", 2));*/
-
-            LiftSystem.LiftSystem liftSystem = new LiftSystem.LiftSystem(5, 2);
+            /*LiftSystem.LiftSystem liftSystem = new LiftSystem.LiftSystem(5, 2);
             liftSystem.Start();
-            liftSystem.CreatePassenger(80, 3, 5);
+            liftSystem.CreatePassenger(80, 1, 5);
+            Console.WriteLine(liftSystem.PassengerStatus(1));
             liftSystem.CreatePassenger(80, 2, 5);
+            Console.WriteLine(liftSystem.PassengerStatus(1));
             liftSystem.CreatePassenger(80, 1, 3);
+            Console.WriteLine(liftSystem.PassengerStatus(1));
             liftSystem.CreatePassenger(80, 4, 3);
+            Console.WriteLine(liftSystem.PassengerStatus(1));
             liftSystem.CreatePassenger(80, 5, 1);
+            Console.WriteLine(liftSystem.PassengerStatus(1));
             liftSystem.CreatePassenger(80, 1, 2);
+            Console.WriteLine(liftSystem.PassengerStatus(1));
 
             Thread.Sleep(4000);
+            Console.WriteLine(liftSystem.PassengerStatus(1));
             liftSystem.Stop();
+            Console.WriteLine(liftSystem.PassengerStatus(1));
             Thread.Sleep(6000);
-            Console.WriteLine(liftSystem.CountPassengers());
-            Thread.Sleep(Timeout.Infinite);
+            Console.WriteLine(liftSystem.PassengerStatus(1));
+            Thread.Sleep(Timeout.Infinite);/**/
         }
     }
 }

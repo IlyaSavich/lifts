@@ -55,6 +55,7 @@ namespace LIFT.LiftSystem
             }
 
             Passenger.Passenger passenger = new Passenger.Passenger(weight, necessaryFloor, currentFloor, liftNumber);
+
             try
             {
                 Building.ValidatePassenger(passenger);
@@ -162,6 +163,34 @@ namespace LIFT.LiftSystem
             count += Building.CountPassengersInLifts();
 
             return count;
+        }
+
+        public string PassengerStatus(int id)
+        {
+            Passenger.Passenger passenger = Building.FindPassenger(id);
+
+            if (passenger == null)
+            {
+                return "";
+            }
+
+            int floor;
+            if (passenger.Status == Passenger.Passenger.StatusWaitOnFloor)
+            {
+                floor = passenger.CurrentFloor;
+            }
+            else if (passenger.Status == Passenger.Passenger.StatusMoveUp
+                     || passenger.Status == Passenger.Passenger.StatusMoveDown)
+            {
+                floor = Building.GetLiftFloor(passenger.LiftNumber);
+            }
+            else
+            {
+                floor = passenger.NecessaryFloor;
+            }
+
+
+            return Passenger.Passenger.StatusText[passenger.Status] + " on " + floor;
         }
     }
 }

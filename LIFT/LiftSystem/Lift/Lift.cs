@@ -160,7 +160,7 @@ namespace LIFT.LiftSystem.Lift
             {
                 if (passenger.NecessaryFloor == CurrentFloor)
                 {
-                    Console.WriteLine("Passenger exit Lift" + Id + " on " + CurrentFloor + " floor");
+                    Console.WriteLine("Lift" + Id + ": Passenger exit on " + CurrentFloor + " floor");
                     passenger.ExitLift();
                     AllPassengersInLift.Remove(passenger);
 
@@ -352,7 +352,7 @@ namespace LIFT.LiftSystem.Lift
             if ((newStatus == StatusMoveDown || newStatus == StatusMoveUp) && newStatus != PreviousStatus)
             {
                 InformationRepository.Increment("trips_count");
-                
+
                 if (AllPassengersInLift.Count == 0)
                 {
                     InformationRepository.Increment("idle_trips_count");
@@ -387,7 +387,7 @@ namespace LIFT.LiftSystem.Lift
          * Checking if the passengers calls lift on floors
          */
 
-        protected int GetNeccessaryFloor()
+        public int GetNeccessaryFloor()
         {
             int neccessaryFloor = CalcSelectedFloorInside();
 
@@ -442,7 +442,7 @@ namespace LIFT.LiftSystem.Lift
          * Checking if lift need to move up after call
          */
 
-        protected bool CheckMoveUp(int floorCalled)
+        public bool CheckMoveUp(int floorCalled)
         {
             return (floorCalled - _CurrentFloor) > 0;
         }
@@ -481,6 +481,19 @@ namespace LIFT.LiftSystem.Lift
         public int CountPassengers()
         {
             return AllPassengersInLift.Count;
+        }
+
+        public Passenger.Passenger FindPassenger(int id)
+        {
+            foreach (Passenger.Passenger passenger in AllPassengersInLift)
+            {
+                if (passenger.Id == id)
+                {
+                    return passenger;
+                }
+            }
+
+            return null;
         }
     }
 }

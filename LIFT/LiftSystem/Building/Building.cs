@@ -280,5 +280,41 @@ namespace LIFT.LiftSystem.Building
 
             return count;
         }
+
+        public Passenger.Passenger FindPassenger(int id)
+        {
+            for (int i = 0; i < Passengers.Length; i++)
+            {
+                foreach (Passenger.Passenger passenger in Passengers[i])
+                {
+                    if (passenger.Id == id)
+                    {
+                        return passenger;
+                    }
+                }
+            }
+
+            foreach (Lift.Lift lift in Lifts)
+            {
+                Passenger.Passenger passenger = lift.FindPassenger(id);
+
+                if (passenger != null)
+                {
+                    return passenger;
+                }
+            }
+
+            return null;
+        }
+
+        public int GetLiftFloor(int liftNumber)
+        {
+            if (liftNumber < 0 || liftNumber > Lifts.Length)
+            {
+                return -1;
+            }
+
+            return Lifts[liftNumber].CurrentFloor;
+        }
     }
 }
