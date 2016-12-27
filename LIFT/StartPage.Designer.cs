@@ -38,6 +38,13 @@
             this.statusPanelWorkingTime = new System.Windows.Forms.StatusBarPanel();
             this.timerWorkingTime = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.OutInf = new System.Windows.Forms.TextBox();
+            this.NameB = new System.Windows.Forms.TextBox();
+            this.Name = new System.Windows.Forms.Label();
+            this.errorInit = new System.Windows.Forms.TextBox();
+            this.NumOfPAssen = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SavePerson = new System.Windows.Forms.Button();
             this.errorMessageNecFloor = new System.Windows.Forms.TextBox();
             this.OutPutinformation = new System.Windows.Forms.Label();
@@ -68,6 +75,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelforlift = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.errorNAme = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelMoving)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPaused)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPassengersNumber)).BeginInit();
@@ -126,6 +135,15 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel1.Controls.Add(this.errorNAme);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.OutInf);
+            this.panel1.Controls.Add(this.NameB);
+            this.panel1.Controls.Add(this.Name);
+            this.panel1.Controls.Add(this.errorInit);
+            this.panel1.Controls.Add(this.NumOfPAssen);
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.SavePerson);
             this.panel1.Controls.Add(this.errorMessageNecFloor);
             this.panel1.Controls.Add(this.OutPutinformation);
@@ -157,10 +175,67 @@
             this.panel1.Size = new System.Drawing.Size(197, 554);
             this.panel1.TabIndex = 8;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(4, 393);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 32;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // OutInf
+            // 
+            this.OutInf.Location = new System.Drawing.Point(3, 420);
+            this.OutInf.Name = "OutInf";
+            this.OutInf.Size = new System.Drawing.Size(190, 20);
+            this.OutInf.TabIndex = 31;
+            this.OutInf.TextChanged += new System.EventHandler(this.OutInf_TextChanged);
+            // 
+            // NameB
+            // 
+            this.NameB.Location = new System.Drawing.Point(88, 191);
+            this.NameB.Name = "NameB";
+            this.NameB.Size = new System.Drawing.Size(106, 20);
+            this.NameB.TabIndex = 30;
+            // 
+            // Name
+            // 
+            this.Name.AutoSize = true;
+            this.Name.Location = new System.Drawing.Point(19, 194);
+            this.Name.Name = "Name";
+            this.Name.Size = new System.Drawing.Size(35, 13);
+            this.Name.TabIndex = 29;
+            this.Name.Text = "Name";
+            // 
+            // errorInit
+            // 
+            this.errorInit.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.errorInit.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.errorInit.Location = new System.Drawing.Point(6, 129);
+            this.errorInit.Name = "errorInit";
+            this.errorInit.Size = new System.Drawing.Size(177, 13);
+            this.errorInit.TabIndex = 28;
+            // 
+            // NumOfPAssen
+            // 
+            this.NumOfPAssen.Location = new System.Drawing.Point(139, 106);
+            this.NumOfPAssen.Name = "NumOfPAssen";
+            this.NumOfPAssen.Size = new System.Drawing.Size(58, 20);
+            this.NumOfPAssen.TabIndex = 27;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 113);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 13);
+            this.label1.TabIndex = 26;
+            // 
             // SavePerson
             // 
             this.SavePerson.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.SavePerson.Location = new System.Drawing.Point(9, 298);
+            this.SavePerson.Location = new System.Drawing.Point(7, 351);
             this.SavePerson.Name = "SavePerson";
             this.SavePerson.Size = new System.Drawing.Size(75, 23);
             this.SavePerson.TabIndex = 25;
@@ -172,7 +247,7 @@
             // 
             this.errorMessageNecFloor.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.errorMessageNecFloor.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.errorMessageNecFloor.Location = new System.Drawing.Point(9, 284);
+            this.errorMessageNecFloor.Location = new System.Drawing.Point(6, 332);
             this.errorMessageNecFloor.Name = "errorMessageNecFloor";
             this.errorMessageNecFloor.Size = new System.Drawing.Size(181, 13);
             this.errorMessageNecFloor.TabIndex = 24;
@@ -180,16 +255,16 @@
             // OutPutinformation
             // 
             this.OutPutinformation.AutoSize = true;
-            this.OutPutinformation.Location = new System.Drawing.Point(58, 324);
+            this.OutPutinformation.Location = new System.Drawing.Point(52, 377);
             this.OutPutinformation.Name = "OutPutinformation";
-            this.OutPutinformation.Size = new System.Drawing.Size(93, 13);
+            this.OutPutinformation.Size = new System.Drawing.Size(73, 13);
             this.OutPutinformation.TabIndex = 23;
-            this.OutPutinformation.Text = "Output information";
+            this.OutPutinformation.Text = "Person Status";
             // 
             // MSExelButton
             // 
             this.MSExelButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.MSExelButton.Location = new System.Drawing.Point(136, 339);
+            this.MSExelButton.Location = new System.Drawing.Point(138, 446);
             this.MSExelButton.Name = "MSExelButton";
             this.MSExelButton.Size = new System.Drawing.Size(56, 23);
             this.MSExelButton.TabIndex = 22;
@@ -199,17 +274,18 @@
             // MsWord
             // 
             this.MsWord.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.MsWord.Location = new System.Drawing.Point(68, 339);
+            this.MsWord.Location = new System.Drawing.Point(72, 446);
             this.MsWord.Name = "MsWord";
             this.MsWord.Size = new System.Drawing.Size(53, 23);
             this.MsWord.TabIndex = 21;
             this.MsWord.Text = "Word";
             this.MsWord.UseVisualStyleBackColor = false;
+            this.MsWord.Click += new System.EventHandler(this.MsWord_Click);
             // 
             // toScreen
             // 
             this.toScreen.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.toScreen.Location = new System.Drawing.Point(3, 339);
+            this.toScreen.Location = new System.Drawing.Point(5, 446);
             this.toScreen.Name = "toScreen";
             this.toScreen.Size = new System.Drawing.Size(49, 23);
             this.toScreen.TabIndex = 20;
@@ -220,7 +296,7 @@
             // 
             this.errorMessageCurrentFloor.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.errorMessageCurrentFloor.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.errorMessageCurrentFloor.Location = new System.Drawing.Point(8, 239);
+            this.errorMessageCurrentFloor.Location = new System.Drawing.Point(13, 299);
             this.errorMessageCurrentFloor.Name = "errorMessageCurrentFloor";
             this.errorMessageCurrentFloor.Size = new System.Drawing.Size(181, 13);
             this.errorMessageCurrentFloor.TabIndex = 19;
@@ -228,7 +304,7 @@
             // textBox1
             // 
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(40, 145);
+            this.textBox1.Location = new System.Drawing.Point(51, 178);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 13);
             this.textBox1.TabIndex = 18;
@@ -247,7 +323,7 @@
             // 
             this.errorMessageWeight.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.errorMessageWeight.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.errorMessageWeight.Location = new System.Drawing.Point(6, 194);
+            this.errorMessageWeight.Location = new System.Drawing.Point(13, 257);
             this.errorMessageWeight.Name = "errorMessageWeight";
             this.errorMessageWeight.Size = new System.Drawing.Size(180, 13);
             this.errorMessageWeight.TabIndex = 16;
@@ -273,7 +349,7 @@
             // NeccesaryFloorLab
             // 
             this.NeccesaryFloorLab.AutoSize = true;
-            this.NeccesaryFloorLab.Location = new System.Drawing.Point(21, 261);
+            this.NeccesaryFloorLab.Location = new System.Drawing.Point(6, 315);
             this.NeccesaryFloorLab.Name = "NeccesaryFloorLab";
             this.NeccesaryFloorLab.Size = new System.Drawing.Size(83, 13);
             this.NeccesaryFloorLab.TabIndex = 13;
@@ -282,7 +358,7 @@
             // CurrentFloorlab
             // 
             this.CurrentFloorlab.AutoSize = true;
-            this.CurrentFloorlab.Location = new System.Drawing.Point(23, 216);
+            this.CurrentFloorlab.Location = new System.Drawing.Point(17, 273);
             this.CurrentFloorlab.Name = "CurrentFloorlab";
             this.CurrentFloorlab.Size = new System.Drawing.Size(67, 13);
             this.CurrentFloorlab.TabIndex = 12;
@@ -291,7 +367,7 @@
             // Weight
             // 
             this.Weight.AutoSize = true;
-            this.Weight.Location = new System.Drawing.Point(25, 171);
+            this.Weight.Location = new System.Drawing.Point(17, 233);
             this.Weight.Name = "Weight";
             this.Weight.Size = new System.Drawing.Size(65, 13);
             this.Weight.TabIndex = 11;
@@ -299,7 +375,7 @@
             // 
             // NecessaryFloorButton
             // 
-            this.NecessaryFloorButton.Location = new System.Drawing.Point(126, 258);
+            this.NecessaryFloorButton.Location = new System.Drawing.Point(136, 312);
             this.NecessaryFloorButton.Name = "NecessaryFloorButton";
             this.NecessaryFloorButton.Size = new System.Drawing.Size(58, 20);
             this.NecessaryFloorButton.TabIndex = 10;
@@ -325,7 +401,7 @@
             // StopButtoon
             // 
             this.StopButtoon.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.StopButtoon.Location = new System.Drawing.Point(61, 368);
+            this.StopButtoon.Location = new System.Drawing.Point(65, 479);
             this.StopButtoon.Name = "StopButtoon";
             this.StopButtoon.Size = new System.Drawing.Size(75, 23);
             this.StopButtoon.TabIndex = 7;
@@ -336,7 +412,7 @@
             // CreatePersonButton
             // 
             this.CreatePersonButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.CreatePersonButton.Location = new System.Drawing.Point(101, 298);
+            this.CreatePersonButton.Location = new System.Drawing.Point(109, 350);
             this.CreatePersonButton.Name = "CreatePersonButton";
             this.CreatePersonButton.Size = new System.Drawing.Size(75, 23);
             this.CreatePersonButton.TabIndex = 6;
@@ -347,7 +423,7 @@
             // StartButton
             // 
             this.StartButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.StartButton.Location = new System.Drawing.Point(101, 116);
+            this.StartButton.Location = new System.Drawing.Point(109, 149);
             this.StartButton.Name = "StartButton";
             this.StartButton.Size = new System.Drawing.Size(75, 23);
             this.StartButton.TabIndex = 5;
@@ -358,7 +434,7 @@
             // SaveButton
             // 
             this.SaveButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.SaveButton.Location = new System.Drawing.Point(9, 116);
+            this.SaveButton.Location = new System.Drawing.Point(9, 149);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 4;
@@ -368,28 +444,28 @@
             // 
             // CurrentFloorButton
             // 
-            this.CurrentFloorButton.Location = new System.Drawing.Point(126, 213);
+            this.CurrentFloorButton.Location = new System.Drawing.Point(139, 273);
             this.CurrentFloorButton.Name = "CurrentFloorButton";
             this.CurrentFloorButton.Size = new System.Drawing.Size(58, 20);
             this.CurrentFloorButton.TabIndex = 3;
             // 
             // WeightButton
             // 
-            this.WeightButton.Location = new System.Drawing.Point(126, 168);
+            this.WeightButton.Location = new System.Drawing.Point(136, 233);
             this.WeightButton.Name = "WeightButton";
             this.WeightButton.Size = new System.Drawing.Size(58, 20);
             this.WeightButton.TabIndex = 2;
             // 
             // NumOfLifts
             // 
-            this.NumOfLifts.Location = new System.Drawing.Point(126, 71);
+            this.NumOfLifts.Location = new System.Drawing.Point(139, 71);
             this.NumOfLifts.Name = "NumOfLifts";
             this.NumOfLifts.Size = new System.Drawing.Size(58, 20);
             this.NumOfLifts.TabIndex = 1;
             // 
             // NumberOfFloorsButton
             // 
-            this.NumberOfFloorsButton.Location = new System.Drawing.Point(126, 29);
+            this.NumberOfFloorsButton.Location = new System.Drawing.Point(138, 29);
             this.NumberOfFloorsButton.Name = "NumberOfFloorsButton";
             this.NumberOfFloorsButton.Size = new System.Drawing.Size(58, 20);
             this.NumberOfFloorsButton.TabIndex = 0;
@@ -417,9 +493,23 @@
             this.panelforlift.TabIndex = 0;
             this.panelforlift.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintonFormLift);
             // 
-            // timer1
+            // label2
             // 
-//            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(1, 109);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(139, 13);
+            this.label2.TabIndex = 33;
+            this.label2.Text = "Initial number of Passengers";
+            // 
+            // errorNAme
+            // 
+            this.errorNAme.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.errorNAme.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.errorNAme.Location = new System.Drawing.Point(9, 214);
+            this.errorNAme.Name = "errorNAme";
+            this.errorNAme.Size = new System.Drawing.Size(180, 13);
+            this.errorNAme.TabIndex = 34;
             // 
             // StartPage
             // 
@@ -429,7 +519,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusBar1);
-            this.Name = "StartPage";
+        //    this.Name = "StartPage";
             this.Text = "Elevator Simulator";
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelMoving)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPaused)).EndInit();
@@ -485,6 +575,15 @@
         private System.Windows.Forms.Button SavePerson;
         private System.Windows.Forms.Panel panelforlift;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TextBox errorInit;
+        private System.Windows.Forms.TextBox NumOfPAssen;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox OutInf;
+        private System.Windows.Forms.TextBox NameB;
+        private System.Windows.Forms.Label Name;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox errorNAme;
     }
 }
 

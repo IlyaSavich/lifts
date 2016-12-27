@@ -70,6 +70,9 @@ namespace LIFT.LiftSystem.Passenger
             set { _Status = value; }
         }
 
+       
+        
+
         public Passenger(int weight, int necessaryFloor, int currentFloor, int liftNumber)
         {
             if (weight <= 0)
@@ -83,6 +86,7 @@ namespace LIFT.LiftSystem.Passenger
             NecessaryFloor = necessaryFloor;
             CurrentFloor = currentFloor;
             LiftNumber = liftNumber;
+          
         }
 
         public void CallLift(Lift.Lift lift)

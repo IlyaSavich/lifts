@@ -134,7 +134,7 @@ namespace LIFT.LiftSystem.Lift
             if (!AllowWeight(passenger.Weight))
             {
                 Console.WriteLine("Lift" + Id + ": Passenger need to lose weight. Rejected weight " + passenger.Weight);
-                EventWrapper.FireAddPassenger(Id, CurrentFloor, NeccessaryFloor);
+              
                 return false;
             }
 
