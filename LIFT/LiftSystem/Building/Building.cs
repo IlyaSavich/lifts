@@ -204,6 +204,7 @@ namespace LIFT.LiftSystem.Building
 
             foreach (Passenger.Passenger passenger in removePassengers)
             {
+                EventWrapper.FirePassengerDelivered(passenger.Id);
                 Passengers[currentFloor - 1].Remove(passenger);
             }
         }
@@ -240,6 +241,81 @@ namespace LIFT.LiftSystem.Building
                 throw new InvalidCredentialException(
                     "Passenger neccesary floor is invalid. Building has no such floors. " + passenger.NecessaryFloor);
             }
+        }
+
+        public int CountMovingLifts()
+        {
+            int count = 0;
+            foreach (Lift.Lift lift in Lifts)
+            {
+                if (lift.Status == Lift.Lift.StatusMoveDown || lift.Status == Lift.Lift.StatusMoveUp)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        public int CountStandingLifts()
+        {
+            int count = 0;
+            foreach (Lift.Lift lift in Lifts)
+            {
+                if (lift.Status == Lift.Lift.StatusStandingOpenDoors || lift.Status == Lift.Lift.StatusStandingCloseDoors)
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
+        public int CountPassengersInLifts()
+        {
+            int count = 0;
+            foreach (Lift.Lift lift in Lifts)
+            {
+                count += lift.CountPassengers();
+            }
+
+            return count;
+        }
+
+        public Passenger.Passenger FindPassenger(int id)
+        {
+            for (int i = 0; i < Passengers.Length; i++)
+            {
+                foreach (Passenger.Passenger passenger in Passengers[i])
+                {
+                    if (passenger.Id == id)
+                    {
+                        return passenger;
+                    }
+                }
+            }
+
+            foreach (Lift.Lift lift in Lifts)
+            {
+                Passenger.Passenger passenger = lift.FindPassenger(id);
+
+                if (passenger != null)
+                {
+                    return passenger;
+                }
+            }
+
+            return null;
+        }
+
+        public int GetLiftFloor(int liftNumber)
+        {
+            if (liftNumber < 0 || liftNumber > Lifts.Length)
+            {
+                return -1;
+            }
+
+            return Lifts[liftNumber].CurrentFloor;
         }
     }
 }

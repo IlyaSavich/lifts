@@ -1,16 +1,34 @@
-﻿using System.Security.Authentication;
+﻿using System.Collections;
+using System.Security.Authentication;
 
 namespace LIFT.LiftSystem.Passenger
 {
     public class Passenger
     {
         public static readonly int StatusWaitOnFloor = 1;
-        public static readonly int StatusOnNeccessaryFloor = 1;
+        public static readonly int StatusMoveUp = 2;
+        public static readonly int StatusMoveDown = 3;
+        public static readonly int StatusOnNeccessaryFloor = 4;
 
-       /**
-        * Contents person characteristics
-        */
+        public static readonly Hashtable StatusText = new Hashtable()
+        {
+            {StatusWaitOnFloor, "Wait lift"},
+            {StatusMoveUp, "Moves up"},
+            {StatusMoveDown, "Moves down"},
+            {StatusOnNeccessaryFloor, "Delivered to neccessary floor"}
+        };
+
+        protected static int NextId = 1;
+
+        protected int _Id;
+
+        public int Id => _Id;
+
+        /**
+         * Contents person characteristics
+         */
         protected int _Weight;
+
         public int Weight
         {
             get { return _Weight; }
@@ -18,6 +36,7 @@ namespace LIFT.LiftSystem.Passenger
         }
 
         protected int _NecessaryFloor;
+
         public int NecessaryFloor
         {
             get { return _NecessaryFloor; }
@@ -25,6 +44,7 @@ namespace LIFT.LiftSystem.Passenger
         }
 
         protected int _CurrentFloor;
+
         public int CurrentFloor
         {
             get { return _CurrentFloor; }
@@ -32,6 +52,7 @@ namespace LIFT.LiftSystem.Passenger
         }
 
         protected int _LiftNumber;
+
         public int LiftNumber
         {
             get { return _LiftNumber; }
@@ -42,6 +63,7 @@ namespace LIFT.LiftSystem.Passenger
         * Contents person _Status
         */
         protected int _Status;
+
         public int Status
         {
             get { return _Status; }
@@ -55,6 +77,8 @@ namespace LIFT.LiftSystem.Passenger
                 throw new InvalidCredentialException("Weight can't be zero or negative");
             }
 
+            _Id = NextId;
+            NextId++;
             Weight = weight;
             NecessaryFloor = necessaryFloor;
             CurrentFloor = currentFloor;
@@ -77,6 +101,7 @@ namespace LIFT.LiftSystem.Passenger
             }
 
             PressButtonInLift(lift);
+            Status = lift.CheckMoveUp(lift.GetNeccessaryFloor()) ? StatusMoveUp : StatusMoveDown;
 
             return true;
         }

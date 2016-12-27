@@ -57,6 +57,7 @@ namespace LIFT.LiftSystem
             }
 
             Passenger.Passenger passenger = new Passenger.Passenger(weight, necessaryFloor, currentFloor, liftNumber);
+
             try
             {
                 Building.ValidatePassenger(passenger);
@@ -71,11 +72,6 @@ namespace LIFT.LiftSystem
             Building.PressButton(passenger);
             InformationRepository.Increment("created_passengers_count");
         }
-
-
-/**
-                 * Init building and lifts.
-                 */
 
         public void Init(int floorsCount, int liftsCount)
         {
@@ -145,6 +141,58 @@ namespace LIFT.LiftSystem
             Status = StatusActive;
 
             Building.Resume();
+        }
+
+        public int CountMovingLifts()
+        {
+            return Building.CountMovingLifts();
+        }
+
+        public int CountStandingLifts()
+        {
+            return Building.CountStandingLifts();
+        }
+
+        public int CountPassengers()
+        {
+            int count = 0;
+
+            if (InformationRepository.Has("passengers_count"))
+            {
+                count += int.Parse(InformationRepository.Get("passengers_count"));
+            }
+
+            count += Building.CountPassengersInLifts();
+
+            return count;
+        }
+
+        public string PassengerStatus(int id)
+        {
+            Passenger.Passenger passenger = Building.FindPassenger(id);
+
+            if (passenger == null)
+            {
+                return "";
+            }
+
+            int floor;
+            if (passenger.Status == Passenger.Passenger.StatusWaitOnFloor)
+            {
+                floor = passenger.CurrentFloor;
+            }
+            else if (passenger.Status == Passenger.Passenger.StatusMoveUp
+                     || passenger.Status == Passenger.Passenger.StatusMoveDown)
+            {
+                floor = Building.GetLiftFloor(passenger.LiftNumber);
+            }
+            else
+            {
+                floor = passenger.NecessaryFloor;
+            }
+
+
+            return Passenger.Passenger.StatusText[passenger.Status] + " on " + floor;
         }
     }
 }
