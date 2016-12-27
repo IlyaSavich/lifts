@@ -296,6 +296,7 @@
             this.toScreen.TabIndex = 20;
             this.toScreen.Text = "Screen";
             this.toScreen.UseVisualStyleBackColor = false;
+            this.toScreen.Click += new System.EventHandler(this.toScreen_Click);
             // 
             // errorMessageCurrentFloor
             // 

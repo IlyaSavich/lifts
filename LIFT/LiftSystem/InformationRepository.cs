@@ -10,6 +10,14 @@ namespace LIFT.LiftSystem
 
     public class InformationRepository
     {
+        public static readonly Hashtable InfoNames = new Hashtable()
+        {
+            {"total_moved_weight", "Total moved weight" },
+            {"passengers_count", "Passengers count" },
+            {"trips_count", "Trips count" },
+            {"idle_trips_count", "Idle trips count" }
+        };
+
         /**
          * Dictionary that storing all info
          */
@@ -75,6 +83,17 @@ namespace LIFT.LiftSystem
         public static Hashtable GetFullInfo()
         {
             return Info;
+        }
+
+        public static string OutInfo()
+        {
+            string output = "";
+            output += InfoNames["total_moved_weight"] + ": " + Get("total_moved_weight") + "\n";
+            output += InfoNames["passengers_count"] + ": " + Get("passengers_count") + "\n";
+            output += InfoNames["trips_count"] + ": " + Get("trips_count") + "\n";
+            output += InfoNames["idle_trips_count"] + ": " + Get("idle_trips_count") + "\n";
+
+            return output;
         }
     }
 }

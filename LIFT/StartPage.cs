@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,6 +32,7 @@ namespace LIFT
         private int floorPaint;
         private int NumberOfFirstPassengers;
         private string NamePerson;
+        private Hashtable passengersMapping;
 
 
         public StartPage()
@@ -45,6 +47,7 @@ namespace LIFT
             EventWrapper = Event.GetInstance();
             this.DoubleBuffered = true;
             SetEvents();
+            passengersMapping = new Hashtable();
         }
 
         protected void SetEvents()
@@ -358,7 +361,8 @@ namespace LIFT
             if ((errorMessageCurrentFloor.Text == "") && (errorMessageNecFloor.Text == "") &&
                 (errorMessageWeight.Text == ""))
             {
-                liftSystem.CreatePassenger(PassengerWeight, NecessaryFloor, CurrentFloor);
+                Passenger passenger = liftSystem.CreatePassenger(PassengerWeight, NecessaryFloor, CurrentFloor);
+                passengersMapping[NamePerson] = passenger.Id.ToString();
                 comboBox1.Items.Add(NamePerson);
                 IsPaintPassenger = true;
             }
@@ -380,11 +384,19 @@ namespace LIFT
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int id = int.Parse(passengersMapping[comboBox1.Text].ToString());
+            OutInf.Text = liftSystem.PassengerStatus(id);
         }
 
         private void OutInf_TextChanged(object sender, EventArgs e)
         {
-            OutInf.Text = liftSystem.PassengerStatus(int.Parse(comboBox1.SelectedItem.ToString()));
+            //OutInf.Text = liftSystem.PassengerStatus(int.Parse(comboBox1.SelectedItem.ToString()));
+        }
+
+        private void toScreen_Click(object sender, EventArgs e)
+        {
+            string text = InformationRepository.OutInfo();
+            MessageBox.Show(text);
         }
     }
 }

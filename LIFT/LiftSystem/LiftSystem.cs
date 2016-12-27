@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Security.Authentication;
 using System.Threading;
 
@@ -49,11 +50,11 @@ namespace LIFT.LiftSystem
          * Creating new passenger in system. 
          */
 
-        public void CreatePassenger(int weight, int necessaryFloor, int currentFloor, int liftNumber = 0)
+        public Passenger.Passenger CreatePassenger(int weight, int necessaryFloor, int currentFloor, int liftNumber = 0)
         {
             if (Status != StatusActive)
             {
-                return;
+                return null;
             }
 
             Passenger.Passenger passenger = new Passenger.Passenger(weight, necessaryFloor, currentFloor, liftNumber);
@@ -71,6 +72,8 @@ namespace LIFT.LiftSystem
             Thread.Sleep(PassengerPressBtnTime);
             Building.PressButton(passenger);
             InformationRepository.Increment("created_passengers_count");
+
+            return passenger;
         }
 
         public void Init(int floorsCount, int liftsCount)
