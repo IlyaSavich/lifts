@@ -11,6 +11,7 @@ using LIFT.LiftSystem;
 using LIFT;
 using LIFT.LiftSystem.Events;
 using System.Threading;
+using System.Net.NetworkInformation;
 
 namespace LIFT
 {
@@ -28,6 +29,9 @@ namespace LIFT
         private bool IsPaintPassenger = false;
         private int liftPaint;
         private int floorPaint;
+        private int _point;
+
+
 
         public StartPage()
         {
@@ -142,21 +146,42 @@ namespace LIFT
             PaintLiftDoorOpen(g);
             Thread.Sleep(1000);
             PaintLiftDoorClose(g);
+            PainPassenger(g);
+          
             
 
         }
 
+       
+
+      
 
         Bitmap man = new Bitmap(Properties.Resources.TrollMan);
-        private void PainPassenger(Graphics g, int currentfloor, int necessaryfloor)
+        private void PainPassenger(Graphics g)
         {
-            int x=-10;
-            if (IsPressedButton)
-                       g.DrawImage(Properties.Resources.LiftDoors, 45 + currentfloor * 70, 505 +x, 30, 40);
+            int x = 10;
+            if (IsPaintPassenger)
+                for (int i = 0; i < 10; i++)
+                {
+                  
+                    g.DrawImage(Properties.Resources.TrollMan, 80+x, 505, 30, 40);
+                    Thread.Sleep(50);
+                                 
+                    
+                    x +=10;
+                    this.Invalidate();
+                    
+                }
+            
+            
+            
 
         }
-        
-        
+       
+
+    
+
+
 
 
 
@@ -317,6 +342,9 @@ namespace LIFT
             CreatePersonButton.Enabled = false;
 
         }
+
+
+
 
 
         #endregion checkInPutParam

@@ -16,18 +16,18 @@ namespace LIFT
         [STAThread]
         static void Main()
         {
-            /*Application.EnableVisualStyles();
+            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StartPage());*/
+            Application.Run(new StartPage());
 
-            /*InformationRepository.Update("name", "Jack");
+        /*    InformationRepository.Update("name", "Jack");
             Console.WriteLine(InformationRepository.Get("name"));
             InformationRepository.Update("name", "John");
             Console.WriteLine(InformationRepository.Get("name"));
             InformationRepository.Update("id", "123");
             Console.WriteLine(InformationRepository.Add("id", 1));
             Console.WriteLine(InformationRepository.Add("name", 2));
-            Console.WriteLine(InformationRepository.Add("price", 2));*/
+            Console.WriteLine(InformationRepository.Add("price", 2));
 
             LiftSystem.LiftSystem liftSystem = new LiftSystem.LiftSystem(5, 2);
             liftSystem.Start();
@@ -45,7 +45,7 @@ namespace LIFT
             Console.WriteLine(InformationRepository.Get("idle_trips_count"));
             Console.WriteLine(InformationRepository.Get("total_moved_weight"));
             Console.WriteLine(InformationRepository.Get("created_passengers_count"));
-            Thread.Sleep(Timeout.Infinite);
+            Thread.Sleep(Timeout.Infinite);*/
         }
     }
 }

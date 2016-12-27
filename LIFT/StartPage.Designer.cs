@@ -67,6 +67,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelforlift = new System.Windows.Forms.Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelMoving)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPaused)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPassengersNumber)).BeginInit();
@@ -415,6 +416,7 @@
             this.panelforlift.Size = new System.Drawing.Size(805, 583);
             this.panelforlift.TabIndex = 0;
             this.panelforlift.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintonFormLift);
+
             // 
             // StartPage
             // 
@@ -426,7 +428,6 @@
             this.Controls.Add(this.statusBar1);
             this.Name = "StartPage";
             this.Text = "Elevator Simulator";
-//            this.Paint += new System.Windows.Forms.PaintEventHandler(this.paintyghv);
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelMoving)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPaused)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPassengersNumber)).EndInit();
@@ -480,6 +481,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button SavePerson;
         private System.Windows.Forms.Panel panelforlift;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
