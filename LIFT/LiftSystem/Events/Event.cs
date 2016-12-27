@@ -13,6 +13,9 @@
         public delegate void EventPassengerDelivered(int passengerId);
         public event EventPassengerDelivered PassengerDelivered;
 
+        public delegate void EventAddPassen(int liftId, int floor, int current);
+        public event EventAddPassen AddPAsse;
+
         private Event() { }
 
         public static Event GetInstance()
@@ -39,5 +42,11 @@
         {
             PassengerDelivered?.Invoke(passengerId);
         }
+
+
+
+
+
+
     }
 }
