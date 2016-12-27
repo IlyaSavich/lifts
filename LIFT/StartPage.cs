@@ -42,7 +42,6 @@ namespace LIFT
             MsWord.Enabled = false;
             toScreen.Enabled = false;
             MSExelButton.Enabled = false;
-            SavePerson.Enabled = false;
             EventWrapper = Event.GetInstance();
             this.DoubleBuffered = true;
             SetEvents();
@@ -194,6 +193,18 @@ namespace LIFT
         private void timerWorkingTime_Tick(object sender, EventArgs e)
         {
             statusPanelWorkingTime.Text = DateTime.Now.ToString("HH:mm:ss"); // TODO show time from start system
+
+            if (liftSystem == null)
+            {
+                return;
+            }
+
+            string count = liftSystem.CountMovingLifts().ToString();
+            statusPanelMoving.Text = "Moving Lifts: " + count;
+            count = liftSystem.CountStandingLifts().ToString();
+            statusPanelPaused.Text = "Paused Lifts: " + count;
+            count = liftSystem.CountPassengers().ToString();
+            statusPanelPassengersNumber.Text = "Passengers Number: " + count;
         }
 
         #region checkInputParam
@@ -268,12 +279,11 @@ namespace LIFT
             MSExelButton.Enabled = true;
             toScreen.Enabled = true;
             IsPressedButton = true;
-            SavePerson.Enabled = true;
             this.liftSystem = new LiftSystem.LiftSystem(this.NumberOfFloors, this.NumberofLifts);
             liftSystem.Start();
         }
 
-        private void SavePerson_Click(object sender, EventArgs e)
+        private void ValidatePassengerInputs()
         {
             if (CurrentFloorButton.Text != "")
             {
@@ -338,18 +348,13 @@ namespace LIFT
             {
                 errorNAme.Text = "Input data";
             }
-
-
-            if ((errorMessageWeight.Text == "") && (errorMessageCurrentFloor.Text == "") &&
-                (errorMessageNecFloor.Text == "") && (errorNAme.Text == ""))
-            {
-                SavePerson.Enabled = true;
-            }
         }
 
 
         private void CreatePersonButton_Click(object sender, EventArgs e)
         {
+            ValidatePassengerInputs();
+
             if ((errorMessageCurrentFloor.Text == "") && (errorMessageNecFloor.Text == "") &&
                 (errorMessageWeight.Text == ""))
             {
@@ -364,6 +369,7 @@ namespace LIFT
             StopButtoon.Enabled = false;
             StartButton.Enabled = true;
             CreatePersonButton.Enabled = false;
+            liftSystem.Stop();
         }
 
         #endregion checkInPutParam

@@ -38,6 +38,8 @@
             this.statusPanelWorkingTime = new System.Windows.Forms.StatusBarPanel();
             this.timerWorkingTime = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.errorNAme = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.OutInf = new System.Windows.Forms.TextBox();
             this.NameB = new System.Windows.Forms.TextBox();
@@ -45,7 +47,6 @@
             this.errorInit = new System.Windows.Forms.TextBox();
             this.NumOfPAssen = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.SavePerson = new System.Windows.Forms.Button();
             this.errorMessageNecFloor = new System.Windows.Forms.TextBox();
             this.OutPutinformation = new System.Windows.Forms.Label();
             this.MSExelButton = new System.Windows.Forms.Button();
@@ -75,8 +76,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelforlift = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.errorNAme = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelMoving)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPaused)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPassengersNumber)).BeginInit();
@@ -144,7 +143,6 @@
             this.panel1.Controls.Add(this.errorInit);
             this.panel1.Controls.Add(this.NumOfPAssen);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.SavePerson);
             this.panel1.Controls.Add(this.errorMessageNecFloor);
             this.panel1.Controls.Add(this.OutPutinformation);
             this.panel1.Controls.Add(this.MSExelButton);
@@ -174,6 +172,24 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(197, 554);
             this.panel1.TabIndex = 8;
+            // 
+            // errorNAme
+            // 
+            this.errorNAme.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.errorNAme.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.errorNAme.Location = new System.Drawing.Point(9, 214);
+            this.errorNAme.Name = "errorNAme";
+            this.errorNAme.Size = new System.Drawing.Size(180, 13);
+            this.errorNAme.TabIndex = 34;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(1, 109);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(139, 13);
+            this.label2.TabIndex = 33;
+            this.label2.Text = "Initial number of Passengers";
             // 
             // comboBox1
             // 
@@ -231,17 +247,6 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 26;
-            // 
-            // SavePerson
-            // 
-            this.SavePerson.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.SavePerson.Location = new System.Drawing.Point(7, 351);
-            this.SavePerson.Name = "SavePerson";
-            this.SavePerson.Size = new System.Drawing.Size(75, 23);
-            this.SavePerson.TabIndex = 25;
-            this.SavePerson.Text = "Save";
-            this.SavePerson.UseVisualStyleBackColor = false;
-            this.SavePerson.Click += new System.EventHandler(this.SavePerson_Click);
             // 
             // errorMessageNecFloor
             // 
@@ -412,7 +417,7 @@
             // CreatePersonButton
             // 
             this.CreatePersonButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.CreatePersonButton.Location = new System.Drawing.Point(109, 350);
+            this.CreatePersonButton.Location = new System.Drawing.Point(55, 351);
             this.CreatePersonButton.Name = "CreatePersonButton";
             this.CreatePersonButton.Size = new System.Drawing.Size(75, 23);
             this.CreatePersonButton.TabIndex = 6;
@@ -493,24 +498,6 @@
             this.panelforlift.TabIndex = 0;
             this.panelforlift.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintonFormLift);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1, 109);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(139, 13);
-            this.label2.TabIndex = 33;
-            this.label2.Text = "Initial number of Passengers";
-            // 
-            // errorNAme
-            // 
-            this.errorNAme.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.errorNAme.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.errorNAme.Location = new System.Drawing.Point(9, 214);
-            this.errorNAme.Name = "errorNAme";
-            this.errorNAme.Size = new System.Drawing.Size(180, 13);
-            this.errorNAme.TabIndex = 34;
-            // 
             // StartPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -519,7 +506,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusBar1);
-        //    this.Name = "StartPage";
+            //this.Name = "StartPage";
             this.Text = "Elevator Simulator";
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelMoving)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusPanelPaused)).EndInit();
@@ -572,7 +559,6 @@
         private System.Windows.Forms.Button MsWord;
         private System.Windows.Forms.Button toScreen;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button SavePerson;
         private System.Windows.Forms.Panel panelforlift;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox errorInit;
