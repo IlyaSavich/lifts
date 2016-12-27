@@ -209,14 +209,16 @@ namespace LIFT.LiftSystem.Building
             }
         }
 
-        protected void SetPassengersToLift(Lift.Lift lift)
+        protected bool SetPassengersToLift(Lift.Lift lift)
         {
             List<Passenger.Passenger> removePassengers = new List<Passenger.Passenger>();
 
+            bool overweighted = false;
             foreach (Passenger.Passenger passenger in Passengers[lift.CurrentFloor - 1])
             {
                 if (!passenger.EnterLift(lift))
                 {
+                    overweighted = true;
                     break;
                 }
                 removePassengers.Add(passenger);
@@ -226,6 +228,8 @@ namespace LIFT.LiftSystem.Building
             {
                 Passengers[lift.CurrentFloor - 1].Remove(passenger);
             }
+
+            return overweighted;
         }
 
         public void ValidatePassenger(Passenger.Passenger passenger)
